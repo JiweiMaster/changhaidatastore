@@ -1,0 +1,68 @@
+<template>
+  <div class="basicInfo">
+    <van-form @submit="onSubmit" validate-first @failed="onFailed">
+      <van-field
+        v-model="value1"
+        name="pattern"
+        label="住院号"
+        colon
+        :rules="[{ required: true, pattern, message: '请输入住院号' }]"
+      />
+      <van-field
+        v-model="name"
+        name="name"
+        label="患者姓名"
+        colon
+        show-error
+        :rules="[{ required: true, message: '请输入患者姓名' }]"
+      />
+      <van-field
+        v-model="age"
+        name="age"
+        label="患者年龄"
+        colon
+        show-error
+        :rules="[{ required: true, message: '请输入患者年龄' }]"
+      />
+      <van-field name="radio" label="性别">
+        <template #input>
+          <van-radio-group v-model="radio" direction="horizontal">
+            <van-radio name="1">男</van-radio>
+            <van-radio name="2">女</van-radio>
+          </van-radio-group>
+        </template>
+      </van-field>
+      <div class="footButton" style="margin: 16px">
+        <van-button round type="info" native-type="submit">取消</van-button>
+        <van-button round type="info" native-type="submit">保存</van-button>
+        <van-button round type="info" native-type="submit">上传</van-button>
+      </div>
+    </van-form>
+  </div>
+</template>
+
+<script>
+  export default {
+    name: 'DataItem',
+    data() {
+      return {
+        value1: '',
+        name: '',
+        age: '',
+        pattern: /\d{6}/,
+        radio: '1'
+      }
+    }
+  }
+</script>
+
+<style scoped>
+  .basicInfo {
+    display: flex;
+    justify-content: center;
+  }
+  .footButton {
+    display: flex;
+    justify-content: space-between;
+  }
+</style>
