@@ -1,5 +1,5 @@
 <template>
-  <div class="firstPage">
+  <div class="first-page">
     <h1>胰腺病例录入系统</h1>
     <Button class="btn" color="primary" elevation="2" outlined>
       进入系统
@@ -19,7 +19,7 @@
 </script>
 
 <style scoped>
-  .firstPage {
+  .first-page {
     margin-top: 10vh;
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;

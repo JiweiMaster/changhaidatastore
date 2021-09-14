@@ -1,6 +1,6 @@
 <template>
-  <div class="basicInfo">
-    <van-form @submit="onSubmit" validate-first @failed="onFailed">
+  <div class="basic-info">
+    <van-form validate-first>
       <van-field
         v-model="value1"
         name="pattern"
@@ -24,7 +24,7 @@
         show-error
         :rules="[{ required: true, message: '请输入患者年龄' }]"
       />
-      <van-field name="radio" label="性别">
+      <van-field name="sex" label="性别">
         <template #input>
           <van-radio-group v-model="radio" direction="horizontal">
             <van-radio name="1">男</van-radio>
@@ -32,10 +32,14 @@
           </van-radio-group>
         </template>
       </van-field>
-      <div class="footButton" style="margin: 16px">
-        <van-button round type="info" native-type="submit">取消</van-button>
-        <van-button round type="info" native-type="submit">保存</van-button>
-        <van-button round type="info" native-type="submit">上传</van-button>
+      <div class="foot-button" style="margin: 16px">
+        <van-button round type="info" native-type="reset">取消</van-button>
+        <van-button round type="info" native-type="submit" @click="saveInfo"
+          >保存</van-button
+        >
+        <van-button round type="info" native-type="submit" @click="uploadInfo"
+          >上传</van-button
+        >
       </div>
     </van-form>
   </div>
@@ -52,16 +56,20 @@
         pattern: /\d{6}/,
         radio: '1'
       }
+    },
+    methods: {
+      saveInfo() {},
+      uploadInfo() {}
     }
   }
 </script>
 
 <style scoped>
-  .basicInfo {
+  .basic-info {
     display: flex;
     justify-content: center;
   }
-  .footButton {
+  .foot-button {
     display: flex;
     justify-content: space-between;
   }
