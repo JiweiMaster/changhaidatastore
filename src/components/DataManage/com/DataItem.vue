@@ -7,8 +7,20 @@
       <p>年龄：{{ info.age }}</p>
       <p>病理信息：{{ info.pathological }}</p>
     </div>
-    <van-button class="btn" type="primary" size="small">编辑</van-button>
-    <van-button class="btn" type="primary" size="small">上传</van-button>
+    <van-button
+      class="btn"
+      type="primary"
+      size="small"
+      v-if="this.info.upload == false"
+      >编辑</van-button
+    >
+    <van-button
+      class="btn"
+      type="primary"
+      size="small"
+      v-if="this.info.upload == false"
+      >上传</van-button
+    >
     <van-divider />
   </div>
 </template>
