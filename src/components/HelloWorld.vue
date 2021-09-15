@@ -11,14 +11,13 @@
     </div>
     <van-tabbar v-model="active">
       <van-tabbar-item icon="add-o">新建</van-tabbar-item>
-      <van-tabbar-item icon="todo-list-o">编辑</van-tabbar-item>
+      <van-tabbar-item icon="todo-list-o" v-on:click="edit()">编辑中</van-tabbar-item>
       <van-tabbar-item icon="passed">已上传</van-tabbar-item>
     </van-tabbar>
   </div>
 </template>
 
 <script>
-
 export default {
   name: 'HelloWorld',
   components: {
@@ -38,6 +37,9 @@ export default {
     newData(){
       console.log('new 一个新的病例数据'+this.href)
       this.$root.currentRoute = '/BaseInfo'
+    },
+    edit(){
+      this.$root.currentRoute = '/Editing'
     }
   }
 }
