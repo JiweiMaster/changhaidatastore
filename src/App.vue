@@ -1,22 +1,16 @@
 <template>
   <div id="app">
-    <!-- <HelloWorld /> -->
-    <data-manage></data-manage>
-    <!-- <data-entry></data-entry> -->
+    <home-page></home-page>
   </div>
 </template>
 
 <script>
-  // import DataEntry from './components/DataEntry/DataEntry.vue'
-  // import HelloWorld from './components/HelloWorld.vue'
-  import DataManage from './components/DataManage/DataManage.vue'
+  import HomePage from './components/HomePage.vue'
 
   export default {
     name: 'App',
     components: {
-      //HelloWorld,
-      DataManage
-      // DataEntry
+      HomePage
     }
   }
 </script>
