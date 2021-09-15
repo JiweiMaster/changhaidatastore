@@ -49,6 +49,9 @@ export default {
   padding: 0 13px !important;
   font-size: 14px !important;
 }
+.van-button--round{
+  border-radius: 99px !important;
+}
 
 .van-nav-bar{
   background-color: #913935 !important;
@@ -69,6 +72,7 @@ export default {
 .van-tabbar-item--active{
   color: #913935 !important;
 }
+
 h3 {
   margin: 40px 0 0;
 }
