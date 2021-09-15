@@ -6,8 +6,8 @@
         left-arrow
         @click-left="returnLastPage()"
     />
-    <div style="margin-top: 70vh; margin-left: 60vw">
-      <van-button round type="info" width="3rem" height="6rem" icon="edit" v-on:click="newData()"></van-button>
+    <div style="margin-top: 70vh; margin-left: 70vw">
+      <van-button round type="info" width="3rem" height="3rem" icon="edit" v-on:click="newData()"></van-button>
     </div>
     <van-tabbar v-model="active">
       <van-tabbar-item icon="add-o">新建</van-tabbar-item>
