@@ -8,7 +8,7 @@
         <huayan />
       </van-tab>
       <van-tab title="影像"><ImagesComponent /></van-tab>
-      <van-tab title="手术">内容 4</van-tab>
+      <van-tab title="手术"><SurgeryComponent /></van-tab>
       <van-tab title="病理">内容 4</van-tab>
     </van-tabs>
   </div>
@@ -18,12 +18,14 @@
   import BaseComponent from './BaseComponent'
   import huayan from './huayan'
   import ImagesComponent from './ImagesComponent'
+  import SurgeryComponent from './SurgeryComponent'
   export default {
     name: 'BaseInfo.vue',
     components: {
       BaseComponent,
       huayan,
-      ImagesComponent
+      ImagesComponent,
+      SurgeryComponent
     },
     data() {
       return {
