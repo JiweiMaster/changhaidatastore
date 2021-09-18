@@ -313,7 +313,7 @@
 </script>
 
 <style>
-  .van-field__label {
-    width: 15em !important;
-  }
+  /* .van-field__label {
+      width: 15em !important;
+    } */
 </style>

@@ -72,6 +72,262 @@
           />
         </van-popup>
       </van-cell-group>
+
+      <van-cell-group>
+        <van-field
+          v-model="value1"
+          label="手术时间（min）"
+          placeholder="请输入大于0的正整数"
+          input-align="right"
+        />
+      </van-cell-group>
+
+      <van-cell-group>
+        <van-field
+          v-model="value2"
+          label="术中出血（ml）"
+          placeholder="请输入大于等于0的正整数"
+          input-align="right"
+        />
+      </van-cell-group>
+
+      <van-cell-group>
+        <van-field
+          v-model="value3"
+          label="输血量（ml）"
+          placeholder="请输入大于等于0的正整数"
+          input-align="right"
+        />
+      </van-cell-group>
+
+      <van-cell-group>
+        <van-field
+          v-model="fieldValue05"
+          is-link
+          readonly
+          label="门静脉置换"
+          @click="show05 = true"
+        />
+        <van-popup v-model="show05" round position="bottom">
+          <van-cascader
+            v-model="cascaderValue05"
+            :options="options05"
+            @close="show05 = false"
+            @finish="onFinish05"
+          />
+        </van-popup>
+      </van-cell-group>
+
+      <van-cell-group>
+        <van-field
+          v-model="fieldValue06"
+          is-link
+          readonly
+          label="术后胰瘘（POPF）"
+          @click="show06 = true"
+        />
+        <van-popup v-model="show06" round position="bottom">
+          <van-cascader
+            v-model="cascaderValue06"
+            :options="options06"
+            @close="show06 = false"
+            @finish="onFinish06"
+          />
+        </van-popup>
+      </van-cell-group>
+
+      <van-cell-group>
+        <van-field
+          v-model="fieldValue07"
+          is-link
+          readonly
+          label="胃排空延迟（DGE）"
+          @click="show07 = true"
+        />
+        <van-popup v-model="show07" round position="bottom">
+          <van-cascader
+            v-model="cascaderValue07"
+            :options="options07"
+            @close="show07 = false"
+            @finish="onFinish07"
+          />
+        </van-popup>
+      </van-cell-group>
+
+      <van-cell-group>
+        <van-field
+          v-model="fieldValue08"
+          is-link
+          readonly
+          label="手术后出血（PPH）"
+          @click="show08 = true"
+        />
+        <van-popup v-model="show08" round position="bottom">
+          <van-cascader
+            v-model="cascaderValue08"
+            :options="options08"
+            @close="show08 = false"
+            @finish="onFinish08"
+          />
+        </van-popup>
+      </van-cell-group>
+
+      <van-cell-group>
+        <van-field
+          v-model="fieldValue09"
+          is-link
+          readonly
+          label="胆瘘"
+          @click="show09 = true"
+        />
+        <van-popup v-model="show09" round position="bottom">
+          <van-cascader
+            v-model="cascaderValue09"
+            :options="options09"
+            @close="show09 = false"
+            @finish="onFinish09"
+          />
+        </van-popup>
+      </van-cell-group>
+
+      <van-cell-group>
+        <van-field
+          v-model="fieldValue10"
+          is-link
+          readonly
+          label="乳糜漏"
+          @click="show10 = true"
+        />
+        <van-popup v-model="show10" round position="bottom">
+          <van-cascader
+            v-model="cascaderValue10"
+            :options="options10"
+            @close="show10 = false"
+            @finish="onFinish10"
+          />
+        </van-popup>
+      </van-cell-group>
+
+      <van-cell-group>
+        <van-field
+          v-model="fieldValue11"
+          is-link
+          readonly
+          label="腹腔感染"
+          @click="show11 = true"
+        />
+        <van-popup v-model="show11" round position="bottom">
+          <van-cascader
+            v-model="cascaderValue11"
+            :options="options11"
+            @close="show11 = false"
+            @finish="onFinish11"
+          />
+        </van-popup>
+      </van-cell-group>
+
+      <van-cell-group>
+        <van-field
+          v-model="fieldValue12"
+          is-link
+          readonly
+          label="VTE或PE"
+          @click="show12 = true"
+        />
+        <van-popup v-model="show12" round position="bottom">
+          <van-cascader
+            v-model="cascaderValue12"
+            :options="options12"
+            @close="show12 = false"
+            @finish="onFinish12"
+          />
+        </van-popup>
+      </van-cell-group>
+
+      <van-cell-group>
+        <van-field
+          v-model="fieldValue13"
+          is-link
+          readonly
+          label="因胰瘘穿刺引流"
+          @click="show13 = true"
+        />
+        <van-popup v-model="show13" round position="bottom">
+          <van-cascader
+            v-model="cascaderValue13"
+            :options="options13"
+            @close="show13 = false"
+            @finish="onFinish13"
+          />
+        </van-popup>
+      </van-cell-group>
+
+      <van-cell-group>
+        <van-field
+          v-model="fieldValue14"
+          is-link
+          readonly
+          label="非计划二次手术"
+          @click="show14 = true"
+        />
+        <van-popup v-model="show14" round position="bottom">
+          <van-cascader
+            v-model="cascaderValue14"
+            :options="options14"
+            @close="show14 = false"
+            @finish="onFinish14"
+          />
+        </van-popup>
+      </van-cell-group>
+
+      <van-cell-group>
+        <van-field
+          v-model="fieldValue15"
+          is-link
+          readonly
+          label="围术期死亡"
+          @click="show15 = true"
+        />
+        <van-popup v-model="show15" round position="bottom">
+          <van-cascader
+            v-model="cascaderValue15"
+            :options="options15"
+            @close="show15 = false"
+            @finish="onFinish15"
+          />
+        </van-popup>
+      </van-cell-group>
+
+      <van-cell-group>
+        <van-field
+          v-model="value4"
+          label="术后住院天数（天）"
+          placeholder="请输入大于等于0的正整数"
+          input-align="right"
+        />
+      </van-cell-group>
+
+      <van-cell-group>
+        <van-field
+          v-model="value5"
+          label="术后引流液淀粉酶（第1天）"
+          input-align="right"
+          center
+        >
+          <template v-slot:button>
+            <van-button
+              @click="addInput"
+              icon="add-o"
+              style="border: none"
+              round
+            ></van-button>
+          </template>
+        </van-field>
+      </van-cell-group>
+
+      <van-cell-group v-for="(value, index) in days" :key="index">
+        <van-field :label="value"></van-field
+      ></van-cell-group>
     </div>
     <!--          提交的按钮-->
     <div style="display: flex; justify-content: center; margin-top: 50px">
@@ -175,7 +431,96 @@
         show04: false,
         fieldValue04: '',
         cascaderValue04: '',
-        options04: [{ text: '软' }, { text: '硬' }]
+        options04: [{ text: '软' }, { text: '硬' }],
+
+        value1: '',
+        value2: '',
+        value3: '',
+        value4: '',
+        value5: '',
+
+        show05: false,
+        fieldValue05: '',
+        cascaderValue05: '',
+        options05: [{ text: '无' }, { text: '有' }],
+
+        show06: false,
+        fieldValue06: '',
+        cascaderValue06: '',
+        options06: [
+          { text: '无' },
+          { text: '生化漏' },
+          { text: 'B级' },
+          { text: 'C级' }
+        ],
+
+        show07: false,
+        fieldValue07: '',
+        cascaderValue07: '',
+        options07: [
+          { text: '无' },
+          { text: 'A级' },
+          { text: 'B级' },
+          { text: 'C级' }
+        ],
+
+        show08: false,
+        fieldValue08: '',
+        cascaderValue08: '',
+        options08: [
+          { text: '无' },
+          { text: 'A级' },
+          { text: 'B级' },
+          { text: 'C级' }
+        ],
+
+        show09: false,
+        fieldValue09: '',
+        cascaderValue09: '',
+        options09: [
+          { text: '无' },
+          { text: 'A级' },
+          { text: 'B级' },
+          { text: 'C级' }
+        ],
+
+        show10: false,
+        fieldValue10: '',
+        cascaderValue10: '',
+        options10: [
+          { text: '无' },
+          { text: 'A级' },
+          { text: 'B级' },
+          { text: 'C级' }
+        ],
+
+        show11: false,
+        fieldValue11: '',
+        cascaderValue11: '',
+        options11: [{ text: '无' }, { text: '有' }],
+
+        show12: false,
+        fieldValue12: '',
+        cascaderValue12: '',
+        options12: [{ text: '无' }, { text: 'VTE' }, { text: 'PE' }],
+
+        show13: false,
+        fieldValue13: '',
+        cascaderValue13: '',
+        options13: [{ text: '无' }, { text: '有' }],
+
+        show14: false,
+        fieldValue14: '',
+        cascaderValue14: '',
+        options14: [{ text: '无' }, { text: '有' }],
+
+        show15: false,
+        fieldValue15: '',
+        cascaderValue15: '',
+        options15: [{ text: '无' }, { text: '有' }],
+
+        days: [], //术后引流淀粉酶（天数）
+        day: 1 //供for使用
       }
     },
     methods: {
@@ -238,15 +583,19 @@
       onFinish15({ selectedOptions }) {
         this.show15 = false
         this.fieldValue15 = selectedOptions.map((option) => option.text).join('/')
+      },
+      addInput() {
+        if (this.day >= 7) {
+          return
+        } else {
+          this.days.push('术后引流液淀粉酶（第' + ++this.day + '天）')
+        }
       }
     }
   }
 </script>
 
 <style>
-  .van-field__label {
-    width: 7em !important;
-  }
   .van-field__control {
     text-align: right !important;
   }
