@@ -9,7 +9,9 @@
       </van-tab>
       <van-tab title="影像">内容 3</van-tab>
       <van-tab title="手术">内容 4</van-tab>
-      <van-tab title="病理">内容 4</van-tab>
+      <van-tab title="病理">
+        <bingli/>
+      </van-tab>
     </van-tabs>
   </div>
 </template>
@@ -17,10 +19,11 @@
 <script>
 import BaseComponent from './BaseComponent'
 import huayan from './huayan'
+import bingli from './bingli'
 export default {
   name: "BaseInfo.vue",
   components: {
-    BaseComponent,huayan
+    BaseComponent,huayan,bingli
   },
   data() {
     return {
