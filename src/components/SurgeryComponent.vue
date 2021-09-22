@@ -9,7 +9,7 @@
           label="手术方式"
           @click="show01 = true"
         />
-        <van-popup v-model="show01" round position="bottom">
+        <van-popup v-model="show01" position="bottom">
           <van-cascader
             v-model="cascaderValue01"
             :options="options01"
@@ -17,6 +17,10 @@
             @finish="onFinish01"
           />
         </van-popup>
+      </van-cell-group>
+
+      <van-cell-group v-if="this.show_other1 === true">
+        <van-field v-model="value_cascader1" label="其他手术方式"></van-field>
       </van-cell-group>
 
       <van-cell-group>
@@ -27,7 +31,7 @@
           label="手术途径"
           @click="show02 = true"
         />
-        <van-popup v-model="show02" round position="bottom">
+        <van-popup v-model="show02" position="bottom">
           <van-cascader
             v-model="cascaderValue02"
             :options="options02"
@@ -45,7 +49,7 @@
           label="胰肠吻合方式"
           @click="show03 = true"
         />
-        <van-popup v-model="show03" round position="bottom">
+        <van-popup v-model="show03" position="bottom">
           <van-cascader
             v-model="cascaderValue03"
             :options="options03"
@@ -53,6 +57,10 @@
             @finish="onFinish03"
           />
         </van-popup>
+      </van-cell-group>
+
+      <van-cell-group v-if="this.show_other2 === true">
+        <van-field v-model="value_cascader2" label="其他吻合方式"></van-field>
       </van-cell-group>
 
       <van-cell-group>
@@ -63,7 +71,7 @@
           label="胰腺质地"
           @click="show04 = true"
         />
-        <van-popup v-model="show04" round position="bottom">
+        <van-popup v-model="show04" position="bottom">
           <van-cascader
             v-model="cascaderValue04"
             :options="options04"
@@ -108,7 +116,7 @@
           label="门静脉置换"
           @click="show05 = true"
         />
-        <van-popup v-model="show05" round position="bottom">
+        <van-popup v-model="show05" position="bottom">
           <van-cascader
             v-model="cascaderValue05"
             :options="options05"
@@ -126,7 +134,7 @@
           label="术后胰瘘（POPF）"
           @click="show06 = true"
         />
-        <van-popup v-model="show06" round position="bottom">
+        <van-popup v-model="show06" position="bottom">
           <van-cascader
             v-model="cascaderValue06"
             :options="options06"
@@ -144,7 +152,7 @@
           label="胃排空延迟（DGE）"
           @click="show07 = true"
         />
-        <van-popup v-model="show07" round position="bottom">
+        <van-popup v-model="show07" position="bottom">
           <van-cascader
             v-model="cascaderValue07"
             :options="options07"
@@ -162,7 +170,7 @@
           label="手术后出血（PPH）"
           @click="show08 = true"
         />
-        <van-popup v-model="show08" round position="bottom">
+        <van-popup v-model="show08" position="bottom">
           <van-cascader
             v-model="cascaderValue08"
             :options="options08"
@@ -180,7 +188,7 @@
           label="胆瘘"
           @click="show09 = true"
         />
-        <van-popup v-model="show09" round position="bottom">
+        <van-popup v-model="show09" position="bottom">
           <van-cascader
             v-model="cascaderValue09"
             :options="options09"
@@ -198,7 +206,7 @@
           label="乳糜漏"
           @click="show10 = true"
         />
-        <van-popup v-model="show10" round position="bottom">
+        <van-popup v-model="show10" position="bottom">
           <van-cascader
             v-model="cascaderValue10"
             :options="options10"
@@ -216,7 +224,7 @@
           label="腹腔感染"
           @click="show11 = true"
         />
-        <van-popup v-model="show11" round position="bottom">
+        <van-popup v-model="show11" position="bottom">
           <van-cascader
             v-model="cascaderValue11"
             :options="options11"
@@ -234,7 +242,7 @@
           label="VTE或PE"
           @click="show12 = true"
         />
-        <van-popup v-model="show12" round position="bottom">
+        <van-popup v-model="show12" position="bottom">
           <van-cascader
             v-model="cascaderValue12"
             :options="options12"
@@ -252,7 +260,7 @@
           label="因胰瘘穿刺引流"
           @click="show13 = true"
         />
-        <van-popup v-model="show13" round position="bottom">
+        <van-popup v-model="show13" position="bottom">
           <van-cascader
             v-model="cascaderValue13"
             :options="options13"
@@ -270,7 +278,7 @@
           label="非计划二次手术"
           @click="show14 = true"
         />
-        <van-popup v-model="show14" round position="bottom">
+        <van-popup v-model="show14" position="bottom">
           <van-cascader
             v-model="cascaderValue14"
             :options="options14"
@@ -288,7 +296,7 @@
           label="围术期死亡"
           @click="show15 = true"
         />
-        <van-popup v-model="show15" round position="bottom">
+        <van-popup v-model="show15" position="bottom">
           <van-cascader
             v-model="cascaderValue15"
             :options="options15"
@@ -354,39 +362,57 @@
         options01: [
           {
             text: '胰十二指肠切除术',
-            children: [{ text: 'PPPD' }, { text: '不保留幽门' }]
+            value: '100',
+            children: [
+              { text: 'PPPD', value: '110' },
+              { text: '不保留幽门', value: '120' }
+            ]
           },
           {
-            text: '胰腺中段切除术'
+            text: '胰腺中段切除术',
+            value: '200'
           },
           {
             text: '胰体尾切除术',
+            value: '300',
             children: [
               {
                 text: '保留脾脏',
-                children: [{ text: 'Warshaw法' }, { text: 'Kimura法' }]
+                value: '310',
+                children: [
+                  { text: 'Warshaw法', value: '311' },
+                  { text: 'Kimura法', value: '312' }
+                ]
               },
-              { text: '不保留脾脏' }
+              { text: '不保留脾脏', value: '320' }
             ]
           },
           {
-            text: '局部肿瘤剜除'
+            text: '局部肿瘤剜除',
+            value: '400'
           },
           {
-            text: '次全胰切除术（PPTP-SP）'
+            text: '次全胰切除术（PPTP-SP）',
+            value: '500'
           },
           {
             text: '全部胰腺切除术',
+            value: '600',
             children: [
               {
                 text: '保留脾脏',
-                children: [{ text: 'Warshaw法' }, { text: 'Kimura法' }]
+                value: '610',
+                children: [
+                  { text: 'Warshaw法', value: '611' },
+                  { text: 'Kimura法', value: '612' }
+                ]
               },
-              { text: '不保留脾脏' }
+              { text: '不保留脾脏', value: '620' }
             ]
           },
           {
-            text: '其他'
+            text: '其他',
+            value: '700'
           }
         ],
 
@@ -394,9 +420,9 @@
         fieldValue02: '',
         cascaderValue02: '',
         options02: [
-          { text: '开腹手术' },
-          { text: '腹腔镜手术' },
-          { text: '机器人手术' }
+          { text: '开腹手术', value: '100' },
+          { text: '腹腔镜手术', value: '200' },
+          { text: '机器人手术', value: '300' }
         ],
 
         show03: false,
@@ -405,33 +431,44 @@
         options03: [
           {
             text: '有胰肠吻合',
+            value: '100',
             children: [
               {
                 text: '吻合方式',
+                value: '110',
                 children: [
-                  { text: '导管对粘膜' },
-                  { text: '套入式吻合' },
-                  { text: '其他' }
+                  { text: '导管对粘膜', value: '111' },
+                  { text: '套入式吻合', value: '112' },
+                  { text: '其他', value: '113' }
                 ]
               },
               {
                 text: '胰管引流管',
+                value: '120',
                 children: [
-                  { text: '内引流' },
-                  { text: '外引流' },
-                  { text: '未放置胰管引流管' }
+                  { text: '内引流', value: '121' },
+                  { text: '外引流', value: '122' },
+                  { text: '未放置胰管引流管', value: '123' }
                 ]
               },
-              { text: '胰管直径' }
+              { text: '胰管直径', value: '130' }
             ]
           },
-          { text: '无胰肠吻合' }
+          { text: '无胰肠吻合', value: '200' }
         ],
 
         show04: false,
         fieldValue04: '',
         cascaderValue04: '',
-        options04: [{ text: '软' }, { text: '硬' }],
+        options04: [
+          { text: '软', value: '100' },
+          { text: '硬', value: '200' }
+        ],
+
+        show_other1: false,
+        value_cascader1: '',
+        show_other2: false,
+        value_cascader2: '',
 
         value1: '',
         value2: '',
@@ -442,82 +479,101 @@
         show05: false,
         fieldValue05: '',
         cascaderValue05: '',
-        options05: [{ text: '无' }, { text: '有' }],
+        options05: [
+          { text: '无', value: '100' },
+          { text: '有', value: '200' }
+        ],
 
         show06: false,
         fieldValue06: '',
         cascaderValue06: '',
         options06: [
-          { text: '无' },
-          { text: '生化漏' },
-          { text: 'B级' },
-          { text: 'C级' }
+          { text: '无', value: '100' },
+          { text: '生化漏', value: '200' },
+          { text: 'B级', value: '300' },
+          { text: 'C级', value: '400' }
         ],
 
         show07: false,
         fieldValue07: '',
         cascaderValue07: '',
         options07: [
-          { text: '无' },
-          { text: 'A级' },
-          { text: 'B级' },
-          { text: 'C级' }
+          { text: '无', value: '100' },
+          { text: 'A级', value: '200' },
+          { text: 'B级', value: '300' },
+          { text: 'C级', value: '400' }
         ],
 
         show08: false,
         fieldValue08: '',
         cascaderValue08: '',
         options08: [
-          { text: '无' },
-          { text: 'A级' },
-          { text: 'B级' },
-          { text: 'C级' }
+          { text: '无', value: '100' },
+          { text: 'A级', value: '200' },
+          { text: 'B级', value: '300' },
+          { text: 'C级', value: '400' }
         ],
 
         show09: false,
         fieldValue09: '',
         cascaderValue09: '',
         options09: [
-          { text: '无' },
-          { text: 'A级' },
-          { text: 'B级' },
-          { text: 'C级' }
+          { text: '无', value: '100' },
+          { text: 'A级', value: '200' },
+          { text: 'B级', value: '300' },
+          { text: 'C级', value: '400' }
         ],
 
         show10: false,
         fieldValue10: '',
         cascaderValue10: '',
         options10: [
-          { text: '无' },
-          { text: 'A级' },
-          { text: 'B级' },
-          { text: 'C级' }
+          { text: '无', value: '100' },
+          { text: 'A级', value: '200' },
+          { text: 'B级', value: '300' },
+          { text: 'C级', value: '400' }
         ],
 
         show11: false,
         fieldValue11: '',
         cascaderValue11: '',
-        options11: [{ text: '无' }, { text: '有' }],
+        options11: [
+          { text: '无', value: '100' },
+          { text: '有', value: '200' }
+        ],
 
         show12: false,
         fieldValue12: '',
         cascaderValue12: '',
-        options12: [{ text: '无' }, { text: 'VTE' }, { text: 'PE' }],
+        options12: [
+          { text: '无', value: '100' },
+          { text: 'VTE', value: '200' },
+          { text: 'PE', value: '300' }
+        ],
 
         show13: false,
         fieldValue13: '',
         cascaderValue13: '',
-        options13: [{ text: '无' }, { text: '有' }],
+        options13: [
+          { text: '无', value: '100' },
+          { text: '有', value: '200' }
+        ],
 
         show14: false,
         fieldValue14: '',
         cascaderValue14: '',
-        options14: [{ text: '无' }, { text: '有' }],
+        options14: [
+          { text: '无', value: '100' },
+          { text: '有', value: '200' }
+        ],
 
         show15: false,
         fieldValue15: '',
         cascaderValue15: '',
-        options15: [{ text: '无' }, { text: '有' }],
+        options15: [
+          { text: '无', value: '100' },
+          { text: '有', value: '200' }
+        ],
 
         days: [], //术后引流淀粉酶（天数）
         day: 1 //供for使用
@@ -527,6 +583,7 @@
       onFinish01({ selectedOptions }) {
         this.show01 = false
         this.fieldValue01 = selectedOptions.map((option) => option.text).join('/')
+        if (selectedOptions[0].value === '700') this.show_other1 = true
       },
       onFinish02({ selectedOptions }) {
         this.show02 = false
@@ -535,6 +592,7 @@
       onFinish03({ selectedOptions }) {
         this.show03 = false
         this.fieldValue03 = selectedOptions.map((option) => option.text).join('/')
+        if (selectedOptions[2].value === '113') this.show_other2 = true
       },
       onFinish04({ selectedOptions }) {
         this.show04 = false

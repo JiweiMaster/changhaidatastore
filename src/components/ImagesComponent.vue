@@ -20,143 +20,170 @@
       </van-cell-group>
 
       <van-cell-group>
-        <van-cell
+        <van-field
+          v-model="fieldValue01"
           is-link
-          close-on-click-action="true"
-          title="囊壁结节"
-          @click="showNbjjChoice = true"
+          readonly
+          label="囊壁结节"
+          @click="show01 = true"
         />
-        <van-action-sheet
-          v-model="showNbjjChoice"
-          :round="false"
-          :actions="nbjj"
-          @select="onSelectNbjj"
-        ></van-action-sheet>
-      </van-cell-group>
-
-      <van-cell-group>
-        <van-cell
-          is-link
-          close-on-click-action="true"
-          title="单多囊"
-          @click="showDdnChoice = true"
-        />
-        <van-action-sheet
-          v-model="showDdnChoice"
-          :round="false"
-          :actions="ddn"
-          @select="onSelectDdn"
-        ></van-action-sheet>
-      </van-cell-group>
-
-      <van-cell-group>
-        <van-cell
-          is-link
-          close-on-click-action="true"
-          title="囊壁强化"
-          @click="showNbqhChoice = true"
-        />
-        <van-action-sheet
-          v-model="showNbqhChoice"
-          :round="false"
-          :actions="nbqh"
-          @select="onSelectNbqh"
-        ></van-action-sheet>
-      </van-cell-group>
-
-      <van-cell-group>
-        <van-cell
-          is-link
-          close-on-click-action="true"
-          title="钙化"
-          @click="showGhChoice = true"
-        />
-        <van-action-sheet
-          v-model="showGhChoice"
-          :round="false"
-          :actions="gh"
-          @select="onSelectGh"
-        ></van-action-sheet>
-      </van-cell-group>
-
-      <van-cell-group>
-        <van-cell
-          is-link
-          close-on-click-action="true"
-          title="实性成分"
-          @click="showSxcfChoice = true"
-        />
-        <van-action-sheet
-          v-model="showSxcfChoice"
-          :round="false"
-          :actions="sxcf"
-          @select="onSelectSxcf"
-        ></van-action-sheet>
-      </van-cell-group>
-
-      <van-cell-group>
-        <van-cell
-          is-link
-          close-on-click-action="true"
-          title="远端胰腺萎缩"
-          @click="showYdyxwsChoice = true"
-        />
-        <van-action-sheet
-          v-model="showYdyxwsChoice"
-          :round="false"
-          :actions="ydyxws"
-          @select="onSelectYdyxws"
-        ></van-action-sheet>
-      </van-cell-group>
-
-      <van-cell-group>
-        <van-cell
-          is-link
-          close-on-click-action="true"
-          title="远端胰管扩张"
-          @click="showYdygkzChoice = true"
-        />
-        <van-action-sheet
-          v-model="showYdygkzChoice"
-          :round="false"
-          :actions="ydygkz"
-          @select="onSelectYdygkz"
-        ></van-action-sheet>
-      </van-cell-group>
-
-      <van-cell-group>
-        <van-cell
-          is-link
-          close-on-click-action="true"
-          title="胰腺周围渗出"
-          @click="showYxzwscChoice = true"
-        />
-        <van-action-sheet
-          v-model="showYxzwscChoice"
-          :round="false"
-          :actions="yxzwsc"
-          @select="onSelectYxzwsc"
-        ></van-action-sheet>
-      </van-cell-group>
-
-      <van-cell-group>
-        <van-cell
-          is-link
-          close-on-click-action="true"
-          title="与主胰管相通"
-          @click="showYzygxtChoice = true"
-        />
-        <van-action-sheet
-          v-model="showYzygxtChoice"
-          :round="false"
-          :actions="yzygxt"
-          @select="onSelectYzygxt"
-        ></van-action-sheet>
+        <van-popup v-model="show01" position="bottom">
+          <van-cascader
+            v-model="cascaderValue01"
+            :options="options01"
+            @close="show01 = false"
+            @finish="onFinish01"
+          />
+        </van-popup>
       </van-cell-group>
 
       <van-cell-group>
         <van-field
-          v-model="zlsm"
+          v-model="fieldValue02"
+          is-link
+          readonly
+          label="单多囊"
+          @click="show02 = true"
+        />
+        <van-popup v-model="show02" position="bottom">
+          <van-cascader
+            v-model="cascaderValue02"
+            :options="options02"
+            @close="show02 = false"
+            @finish="onFinish02"
+          />
+        </van-popup>
+      </van-cell-group>
+
+      <van-cell-group>
+        <van-field
+          v-model="fieldValue03"
+          is-link
+          readonly
+          label="囊壁强化"
+          @click="show03 = true"
+        />
+        <van-popup v-model="show03" position="bottom">
+          <van-cascader
+            v-model="cascaderValue03"
+            :options="options03"
+            @close="show03 = false"
+            @finish="onFinish03"
+          />
+        </van-popup>
+      </van-cell-group>
+
+      <van-cell-group>
+        <van-field
+          v-model="fieldValue04"
+          is-link
+          readonly
+          label="钙化"
+          @click="show04 = true"
+        />
+        <van-popup v-model="show04" position="bottom">
+          <van-cascader
+            v-model="cascaderValue04"
+            :options="options04"
+            @close="show04 = false"
+            @finish="onFinish04"
+          />
+        </van-popup>
+      </van-cell-group>
+
+      <van-cell-group>
+        <van-field
+          v-model="fieldValue05"
+          is-link
+          readonly
+          label="实性成分"
+          @click="show05 = true"
+        />
+        <van-popup v-model="show05" position="bottom">
+          <van-cascader
+            v-model="cascaderValue05"
+            :options="options05"
+            @close="show05 = false"
+            @finish="onFinish05"
+          />
+        </van-popup>
+      </van-cell-group>
+
+      <van-cell-group>
+        <van-field
+          v-model="fieldValue06"
+          is-link
+          readonly
+          label="远端胰腺萎缩"
+          @click="show06 = true"
+        />
+        <van-popup v-model="show06" position="bottom">
+          <van-cascader
+            v-model="cascaderValue06"
+            :options="options06"
+            @close="show06 = false"
+            @finish="onFinish06"
+          />
+        </van-popup>
+      </van-cell-group>
+
+      <van-cell-group>
+        <van-field
+          v-model="fieldValue07"
+          is-link
+          readonly
+          label="远端胰管扩张"
+          @click="show07 = true"
+        />
+        <van-popup v-model="show07" position="bottom">
+          <van-cascader
+            v-model="cascaderValue07"
+            :options="options07"
+            @close="show07 = false"
+            @finish="onFinish07"
+          />
+        </van-popup>
+      </van-cell-group>
+
+      <van-cell-group>
+        <van-field
+          v-model="fieldValue08"
+          is-link
+          readonly
+          label="胰腺周围渗出"
+          @click="show08 = true"
+        />
+        <van-popup v-model="show08" position="bottom">
+          <van-cascader
+            v-model="cascaderValue08"
+            :options="options08"
+            @close="show08 = false"
+            @finish="onFinish08"
+          />
+        </van-popup>
+      </van-cell-group>
+
+      <van-cell-group>
+        <van-field
+          v-model="fieldValue09"
+          is-link
+          readonly
+          label="与主胰管相通"
+          @click="show09 = true"
+        />
+        <van-popup v-model="show09" position="bottom">
+          <van-cascader
+            v-model="cascaderValue09"
+            :options="options09"
+            @close="show09 = false"
+            @finish="onFinish09"
+          />
+        </van-popup>
+      </van-cell-group>
+
+      <van-cell-group>
+        <van-field
+          v-model="zygzj"
           label="主胰管直径
         （mm）"
           placeholder="保留1位小数"
@@ -165,13 +192,21 @@
       </van-cell-group>
 
       <van-cell-group>
-        <van-cell is-link title="所属期相" @click="showSsqxChoice = true" />
-        <van-action-sheet
-          v-model="showSsqxChoice"
-          :round="false"
-          :actions="ssqx"
-          @select="onSelectSsqx"
-        ></van-action-sheet>
+        <van-field
+          v-model="fieldValue10"
+          is-link
+          readonly
+          label="所属期相"
+          @click="show10 = true"
+        />
+        <van-popup v-model="show10" position="bottom">
+          <van-cascader
+            v-model="cascaderValue10"
+            :options="options10"
+            @close="show10 = false"
+            @finish="onFinish10"
+          />
+        </van-popup>
       </van-cell-group>
 
       <div style="margin-top: 5px; width: 90vw; text-align: right">
@@ -226,83 +261,163 @@
     name: 'ImageComponent.vue',
     data() {
       return {
-        showNbjjChoice: false,
-        showDdnChoice: false,
-        showNbqhChoice: false,
-        showGhChoice: false,
-        showSxcfChoice: false,
-        showYdyxwsChoice: false,
-        showYdygkzChoice: false,
-        showYxzwscChoice: false,
-        showYzygxtChoice: false,
-        showSsqxChoice: false,
+        zlsm: '',
+        zdzj: '',
+        zygzj: '',
         message1: '',
+        message2: '',
 
-        nbjj: [
-          { name: '无' },
-          { name: '有囊壁结节' },
-          { name: '伴强化/有囊壁结节' },
-          { name: '无强化' }
+        show01: false,
+        fieldValue01: '',
+        cascaderValue01: '',
+        options01: [
+          { text: '无', value: '100' },
+          {
+            text: '有',
+            value: '200',
+            children: [
+              { text: '有囊壁结节', value: '210' },
+              { text: '伴强化/有囊壁结节', value: '220' },
+              { text: '无强化', value: '230' }
+            ]
+          }
         ],
-        ddn: [{ name: '单囊' }, { name: '多囊' }],
-        nbqh: [{ name: '无' }, { name: '有' }],
-        gh: [
-          { name: '无' },
-          { name: '有钙化' },
-          { name: '位于囊壁/有钙化' },
-          { name: '位于肿瘤内部分隔/有钙化' },
-          { name: '位于肿瘤内实性部分' }
+
+        show02: false,
+        fieldValue02: '',
+        cascaderValue02: '',
+        options02: [
+          { text: '单囊', value: '100' },
+          { text: '多囊', value: '200' }
         ],
-        sxcf: [
-          { name: '无' },
-          { name: '有实性成分' },
-          { name: '伴强化/有实性成分' },
-          { name: '无强化' }
+
+        show03: false,
+        fieldValue03: '',
+        cascaderValue03: '',
+        options03: [
+          { text: '无', value: '100' },
+          { text: '有', value: '200' }
         ],
-        ydyxws: [{ name: '无' }, { name: '有' }],
-        ydygkz: [{ name: '无' }, { name: '有' }],
-        yxzwsc: [{ name: '无' }, { name: '有' }],
-        yzygxt: [{ name: '是' }, { name: '否' }, { name: '无法判断' }],
-        ssqx: [
-          { name: '平扫相' },
-          { name: '动脉相' },
-          { name: '门静脉相' },
-          { name: '延迟相' }
+
+        show04: false,
+        fieldValue04: '',
+        cascaderValue04: '',
+        options04: [
+          { text: '无', value: '100' },
+          {
+            text: '有',
+            value: '200',
+            children: [
+              { text: '有钙化', value: '210' },
+              { text: '位于囊壁/有钙化', value: '220' },
+              { text: '位于肿瘤内部分隔/有钙化', value: '230' },
+              { text: '位于肿瘤内实性部分', value: '240' }
+            ]
+          }
         ],
+
+        show05: false,
+        fieldValue05: '',
+        cascaderValue05: '',
+        options05: [
+          { text: '无', value: '100' },
+          {
+            text: '有',
+            value: '200',
+            children: [
+              { text: '有实性成分', value: '210' },
+              { text: '伴强化/有实性成分', value: '220' },
+              { text: '无强化', value: '230' }
+            ]
+          }
+        ],
+
+        show06: false,
+        fieldValue06: '',
+        cascaderValue06: '',
+        options06: [
+          { text: '无', value: '100' },
+          { text: '有', value: '200' }
+        ],
+
+        show07: false,
+        fieldValue07: '',
+        cascaderValue07: '',
+        options07: [
+          { text: '无', value: '100' },
+          { text: '有', value: '200' }
+        ],
+
+        show08: false,
+        fieldValue08: '',
+        cascaderValue08: '',
+        options08: [
+          { text: '无', value: '100' },
+          { text: '有', value: '200' }
+        ],
+
+        show09: false,
+        fieldValue09: '',
+        cascaderValue09: '',
+        options09: [
+          { text: '是', value: '100' },
+          { text: '否', value: '200' },
+          { text: '无法判断', value: '300' }
+        ],
+
+        show10: false,
+        fieldValue10: '',
+        cascaderValue10: '',
+        options10: [
+          { text: '平扫相', value: '100' },
+          { text: '动脉相', value: '200' },
+          { text: '门静脉相', value: '300' },
+          { text: '延迟相', value: '400' }
+        ],
+
         fileList: []
       }
     },
     methods: {
-      onSelectNbjj() {
-        this.showNbjjChoice = false
-        // Toast(item.name)
+      onFinish01({ selectedOptions }) {
+        this.show01 = false
+        this.fieldValue01 = selectedOptions.map((option) => option.text).join('/')
       },
-      onSelectDdn() {
-        this.showDdnChoice = false
+      onFinish02({ selectedOptions }) {
+        this.show02 = false
+        this.fieldValue02 = selectedOptions.map((option) => option.text).join('/')
       },
-      onSelectNbqh() {
-        this.showNbqhChoice = false
+      onFinish03({ selectedOptions }) {
+        this.show03 = false
+        this.fieldValue03 = selectedOptions.map((option) => option.text).join('/')
       },
-      onSelectGh() {
-        this.showGhChoice = false
+      onFinish04({ selectedOptions }) {
+        this.show04 = false
+        this.fieldValue04 = selectedOptions.map((option) => option.text).join('/')
       },
-      onSelectSxcf() {
-        this.showSxcfChoice = false
+      onFinish05({ selectedOptions }) {
+        this.show05 = false
+        this.fieldValue05 = selectedOptions.map((option) => option.text).join('/')
       },
-      onSelectYdyxws() {
-        this.showYdyxwsChoice = false
+      onFinish06({ selectedOptions }) {
+        this.show06 = false
+        this.fieldValue06 = selectedOptions.map((option) => option.text).join('/')
       },
-      onSelectYdygkz() {
-        this.showYdygkzChoice = false
+      onFinish07({ selectedOptions }) {
+        this.show07 = false
+        this.fieldValue07 = selectedOptions.map((option) => option.text).join('/')
       },
-      onSelectYxzwsc() {
-        this.showYxzwscChoice = false
+      onFinish08({ selectedOptions }) {
+        this.show08 = false
+        this.fieldValue08 = selectedOptions.map((option) => option.text).join('/')
       },
-      onSelectYzygxt() {
-        this.showYzygxtChoice = false
+      onFinish09({ selectedOptions }) {
+        this.show09 = false
+        this.fieldValue09 = selectedOptions.map((option) => option.text).join('/')
       },
-      onSelectSsqx() {
-        this.showSsqxChoice = false
+      onFinish10({ selectedOptions }) {
+        this.show10 = false
+        this.fieldValue10 = selectedOptions.map((option) => option.text).join('/')
       },
       afterRead(file) {
         // 此时可以自行将文件上传至服务器
@@ -314,6 +429,6 @@
 
 <style>
   /* .van-field__label {
-      width: 15em !important;
-    } */
+            width: 15em !important;
+          } */
 </style>
