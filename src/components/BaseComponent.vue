@@ -4,21 +4,21 @@
     <div style="margin-top: 15px">
       <div>住院号*:</div>
       <div>
-        <input class="input_div" v-text="hospitalNum" />
+        <input class="input_div" v-model="hospitalNum" />
       </div>
     </div>
     <!--     患者姓名     -->
     <div style="margin-top: 15px">
       <div>患者姓名*:</div>
       <div>
-        <input class="input_div" v-text="patientName" />
+        <input class="input_div" v-model="patientName" />
       </div>
     </div>
     <!--     患者年龄     -->
     <div style="margin-top: 15px">
       <div>患者年龄*:</div>
       <div>
-        <input class="input_div" v-text="patientAge" />
+        <input class="input_div" v-model="patientAge" />
       </div>
     </div>
     <!--          性别-->

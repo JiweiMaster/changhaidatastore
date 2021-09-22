@@ -1,6 +1,6 @@
  <template>
   <div>
-    <div>
+    <div class="surgery-item">
       <van-cell-group>
         <van-field
           v-model="fieldValue01"
@@ -89,7 +89,7 @@
         <van-field
           v-model="value1"
           label="手术时间（min）"
-          placeholder="请输入大于0的正整数"
+          placeholder="大于0的正整数"
         />
       </van-cell-group>
 
@@ -97,7 +97,7 @@
         <van-field
           v-model="value2"
           label="术中出血（ml）"
-          placeholder="请输入大于等于0的正整数"
+          placeholder="大于等于0的正整数"
         />
       </van-cell-group>
 
@@ -105,7 +105,7 @@
         <van-field
           v-model="value3"
           label="输血量（ml）"
-          placeholder="请输入大于等于0的正整数"
+          placeholder="大于等于0的正整数"
         />
       </van-cell-group>
 
@@ -311,7 +311,7 @@
         <van-field
           v-model="value4"
           label="术后住院天数（天）"
-          placeholder="请输入大于等于0的正整数"
+          placeholder="大于等于0的正整数"
         />
       </van-cell-group>
 
@@ -579,65 +579,65 @@
     methods: {
       onFinish01({ selectedOptions }) {
         this.show01 = false
-        this.fieldValue01 = selectedOptions.map((option) => option.text).join('/')
+        this.fieldValue01 = selectedOptions[selectedOptions.length - 1].text
         if (selectedOptions[0].value === '700') this.show_other1 = true
       },
       onFinish02({ selectedOptions }) {
         this.show02 = false
-        this.fieldValue02 = selectedOptions.map((option) => option.text).join('/')
+        this.fieldValue02 = selectedOptions[selectedOptions.length - 1].text
       },
       onFinish03({ selectedOptions }) {
         this.show03 = false
-        this.fieldValue03 = selectedOptions.map((option) => option.text).join('/')
+        this.fieldValue03 = selectedOptions[selectedOptions.length - 1].text
         if (selectedOptions[2].value === '113') this.show_other2 = true
       },
       onFinish04({ selectedOptions }) {
         this.show04 = false
-        this.fieldValue04 = selectedOptions.map((option) => option.text).join('/')
+        this.fieldValue04 = selectedOptions[selectedOptions.length - 1].text
       },
       onFinish05({ selectedOptions }) {
         this.show05 = false
-        this.fieldValue05 = selectedOptions.map((option) => option.text).join('/')
+        this.fieldValue05 = selectedOptions[selectedOptions.length - 1].text
       },
       onFinish06({ selectedOptions }) {
         this.show06 = false
-        this.fieldValue06 = selectedOptions.map((option) => option.text).join('/')
+        this.fieldValue06 = selectedOptions[selectedOptions.length - 1].text
       },
       onFinish07({ selectedOptions }) {
         this.show07 = false
-        this.fieldValue07 = selectedOptions.map((option) => option.text).join('/')
+        this.fieldValue07 = selectedOptions[selectedOptions.length - 1].text
       },
       onFinish08({ selectedOptions }) {
         this.show08 = false
-        this.fieldValue08 = selectedOptions.map((option) => option.text).join('/')
+        this.fieldValue08 = selectedOptions[selectedOptions.length - 1].text
       },
       onFinish09({ selectedOptions }) {
         this.show09 = false
-        this.fieldValue09 = selectedOptions.map((option) => option.text).join('/')
+        this.fieldValue09 = selectedOptions[selectedOptions.length - 1].text
       },
       onFinish10({ selectedOptions }) {
         this.show10 = false
-        this.fieldValue10 = selectedOptions.map((option) => option.text).join('/')
+        this.fieldValue10 = selectedOptions[selectedOptions.length - 1].text
       },
       onFinish11({ selectedOptions }) {
         this.show11 = false
-        this.fieldValue11 = selectedOptions.map((option) => option.text).join('/')
+        this.fieldValue11 = selectedOptions[selectedOptions.length - 1].text
       },
       onFinish12({ selectedOptions }) {
         this.show12 = false
-        this.fieldValue12 = selectedOptions.map((option) => option.text).join('/')
+        this.fieldValue12 = selectedOptions[selectedOptions.length - 1].text
       },
       onFinish13({ selectedOptions }) {
         this.show13 = false
-        this.fieldValue13 = selectedOptions.map((option) => option.text).join('/')
+        this.fieldValue13 = selectedOptions[selectedOptions.length - 1].text
       },
       onFinish14({ selectedOptions }) {
         this.show14 = false
-        this.fieldValue14 = selectedOptions.map((option) => option.text).join('/')
+        this.fieldValue14 = selectedOptions[selectedOptions.length - 1].text
       },
       onFinish15({ selectedOptions }) {
         this.show15 = false
-        this.fieldValue15 = selectedOptions.map((option) => option.text).join('/')
+        this.fieldValue15 = selectedOptions[selectedOptions.length - 1].text
       },
       addInput() {
         if (this.day >= 7) {
@@ -651,6 +651,9 @@
 </script>
 
 <style>
+  /* .sugery-item.van-cell-group.van-cell.van-field__label {
+                  width: 8em !important;
+                } */
   .van-field__control {
     text-align: right !important;
   }

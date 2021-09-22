@@ -381,43 +381,43 @@
     methods: {
       onFinish01({ selectedOptions }) {
         this.show01 = false
-        this.fieldValue01 = selectedOptions.map((option) => option.text).join('/')
+        this.fieldValue01 = selectedOptions[selectedOptions.length - 1].text
       },
       onFinish02({ selectedOptions }) {
         this.show02 = false
-        this.fieldValue02 = selectedOptions.map((option) => option.text).join('/')
+        this.fieldValue02 = selectedOptions[selectedOptions.length - 1].text
       },
       onFinish03({ selectedOptions }) {
         this.show03 = false
-        this.fieldValue03 = selectedOptions.map((option) => option.text).join('/')
+        this.fieldValue03 = selectedOptions[selectedOptions.length - 1].text
       },
       onFinish04({ selectedOptions }) {
         this.show04 = false
-        this.fieldValue04 = selectedOptions.map((option) => option.text).join('/')
+        this.fieldValue04 = selectedOptions[selectedOptions.length - 1].text
       },
       onFinish05({ selectedOptions }) {
         this.show05 = false
-        this.fieldValue05 = selectedOptions.map((option) => option.text).join('/')
+        this.fieldValue05 = selectedOptions[selectedOptions.length - 1].text
       },
       onFinish06({ selectedOptions }) {
         this.show06 = false
-        this.fieldValue06 = selectedOptions.map((option) => option.text).join('/')
+        this.fieldValue06 = selectedOptions[selectedOptions.length - 1].text
       },
       onFinish07({ selectedOptions }) {
         this.show07 = false
-        this.fieldValue07 = selectedOptions.map((option) => option.text).join('/')
+        this.fieldValue07 = selectedOptions[selectedOptions.length - 1].text
       },
       onFinish08({ selectedOptions }) {
         this.show08 = false
-        this.fieldValue08 = selectedOptions.map((option) => option.text).join('/')
+        this.fieldValue08 = selectedOptions[selectedOptions.length - 1].text
       },
       onFinish09({ selectedOptions }) {
         this.show09 = false
-        this.fieldValue09 = selectedOptions.map((option) => option.text).join('/')
+        this.fieldValue09 = selectedOptions[selectedOptions.length - 1].text
       },
       onFinish10({ selectedOptions }) {
         this.show10 = false
-        this.fieldValue10 = selectedOptions.map((option) => option.text).join('/')
+        this.fieldValue10 = selectedOptions[selectedOptions.length - 1].text
       },
       afterRead(file) {
         // 此时可以自行将文件上传至服务器
@@ -428,7 +428,4 @@
 </script>
 
 <style>
-  /* .van-field__label {
-            width: 15em !important;
-          } */
 </style>

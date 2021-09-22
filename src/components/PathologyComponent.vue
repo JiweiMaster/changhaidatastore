@@ -350,32 +350,32 @@
     methods: {
       onFinish({ selectedOptions }) {
         this.show = false
-        this.fieldValue = selectedOptions.map((option) => option.text).join('/')
+        this.fieldValue = selectedOptions[selectedOptions.length - 1].text
         if (selectedOptions[0].value === '700') this.show_other = true
       },
       onFinish1({ selectedOptions }) {
         this.show1 = false
-        this.fieldValue1 = selectedOptions.map((option) => option.text).join('/')
+        this.fieldValue1 = selectedOptions[selectedOptions.length - 1].text
       },
       onFinish2({ selectedOptions }) {
         this.show2 = false
-        this.fieldValue2 = selectedOptions.map((option) => option.text).join('/')
+        this.fieldValue2 = selectedOptions[selectedOptions.length - 1].text
       },
       onFinish3({ selectedOptions }) {
         this.show3 = false
-        this.fieldValue3 = selectedOptions.map((option) => option.text).join('/')
+        this.fieldValue3 = selectedOptions[selectedOptions.length - 1].text
       },
       onFinish4({ selectedOptions }) {
         this.show4 = false
-        this.fieldValue4 = selectedOptions.map((option) => option.text).join('/')
+        this.fieldValue4 = selectedOptions[selectedOptions.length - 1].text
       },
       onFinish5({ selectedOptions }) {
         this.show5 = false
-        this.fieldValue5 = selectedOptions.map((option) => option.text).join('/')
+        this.fieldValue5 = selectedOptions[selectedOptions.length - 1].text
       },
       onFinish6({ selectedOptions }) {
         this.show6 = false
-        this.fieldValue6 = selectedOptions.map((option) => option.text).join('/')
+        this.fieldValue6 = selectedOptions[selectedOptions.length - 1].text
       }
     }
   }
