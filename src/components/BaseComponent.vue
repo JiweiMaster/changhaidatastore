@@ -23,7 +23,7 @@
     </div>
     <!--          性别-->
     <div style="margin-top: 15px">
-      <div>患者年龄*:</div>
+      <div>患者性别*:</div>
       <div style="margin-top: 10px">
         <van-radio-group v-model="patientGender">
           <van-radio
@@ -40,11 +40,19 @@
     </div>
     <!--          提交的按钮-->
     <div style="display: flex; justify-content: center; margin-top: 50px">
-      <van-button round type="info" style="width: 80px">取消</van-button>
-      <van-button round type="info" style="margin: auto 20px; width: 80px"
+      <van-button round type="info" style="width: 80px" v-on:click="cancelBtn()"
+        >取消</van-button
+      >
+      <van-button
+        round
+        type="info"
+        style="margin: auto 20px; width: 80px"
+        v-on:click="saveBtn()"
         >保存</van-button
       >
-      <van-button round type="info" style="width: 80px">上传</van-button>
+      <van-button round type="info" style="width: 80px" v-on:click="uploadBtn()"
+        >上传</van-button
+      >
       <div></div>
     </div>
   </div>
@@ -52,7 +60,20 @@
 
 <script>
   export default {
-    name: 'BaseComponent.vue'
+    name: 'BaseComponent.vue',
+    data() {
+      return {
+        hospitalNum: '',
+        patientName: '',
+        patientAge: '',
+        patientGender: ''
+      }
+    },
+    methods: {
+      cancelBtn() {},
+      saveBtn() {},
+      uploadBtn() {}
+    }
   }
 </script>
 

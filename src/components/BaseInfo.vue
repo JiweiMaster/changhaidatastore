@@ -1,31 +1,30 @@
 <template>
   <div>
     <van-tabs v-model="active">
-      <van-tab title="基本">
-        <BaseComponent />
-      </van-tab>
-      <van-tab title="化验">
-        <huayan />
-      </van-tab>
+      <van-tab title="基本"><BaseComponent /></van-tab>
+      <van-tab title="化验"><AnalysisComponent /></van-tab>
       <van-tab title="影像"><ImagesComponent /></van-tab>
       <van-tab title="手术"><SurgeryComponent /></van-tab>
-      <van-tab title="病理">内容 4</van-tab>
+      <van-tab title="病理"><PathologyComponent /></van-tab>
     </van-tabs>
   </div>
 </template>
 
 <script>
   import BaseComponent from './BaseComponent'
-  import huayan from './huayan'
+  import AnalysisComponent from './AnalysisComponent'
   import ImagesComponent from './ImagesComponent'
   import SurgeryComponent from './SurgeryComponent'
+  import PathologyComponent from './PathologyComponent'
+
   export default {
     name: 'BaseInfo.vue',
     components: {
       BaseComponent,
-      huayan,
+      AnalysisComponent,
       ImagesComponent,
-      SurgeryComponent
+      SurgeryComponent,
+      PathologyComponent
     },
     data() {
       return {

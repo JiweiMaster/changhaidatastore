@@ -1,10 +1,9 @@
-
-import HelloWorld from './components/HelloWorld'
+import HomePage from './components/HomePage'
+import DataManage from './components/DataManage'
 import BaseInfo from './components/BaseInfo'
-import EditingComponet from './components/EditingComponent'
 
-export  default {
-    '/': HelloWorld,
+export default {
+    '/': HomePage,
+    '/DataManage': DataManage,
     '/BaseInfo': BaseInfo,
-    '/Editing': EditingComponet
 }

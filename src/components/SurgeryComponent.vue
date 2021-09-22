@@ -17,10 +17,12 @@
             @finish="onFinish01"
           />
         </van-popup>
-      </van-cell-group>
 
-      <van-cell-group v-if="this.show_other1 === true">
-        <van-field v-model="value_cascader1" label="其他手术方式"></van-field>
+        <van-field
+          v-if="this.show_other1 === true"
+          v-model="value_cascader1"
+          label="其他手术方式"
+        ></van-field>
       </van-cell-group>
 
       <van-cell-group>
@@ -57,10 +59,12 @@
             @finish="onFinish03"
           />
         </van-popup>
-      </van-cell-group>
 
-      <van-cell-group v-if="this.show_other2 === true">
-        <van-field v-model="value_cascader2" label="其他吻合方式"></van-field>
+        <van-field
+          v-if="this.show_other2 === true"
+          v-model="value_cascader2"
+          label="其他吻合方式"
+        ></van-field>
       </van-cell-group>
 
       <van-cell-group>
@@ -86,7 +90,6 @@
           v-model="value1"
           label="手术时间（min）"
           placeholder="请输入大于0的正整数"
-          input-align="right"
         />
       </van-cell-group>
 
@@ -95,7 +98,6 @@
           v-model="value2"
           label="术中出血（ml）"
           placeholder="请输入大于等于0的正整数"
-          input-align="right"
         />
       </van-cell-group>
 
@@ -104,7 +106,6 @@
           v-model="value3"
           label="输血量（ml）"
           placeholder="请输入大于等于0的正整数"
-          input-align="right"
         />
       </van-cell-group>
 
@@ -311,17 +312,11 @@
           v-model="value4"
           label="术后住院天数（天）"
           placeholder="请输入大于等于0的正整数"
-          input-align="right"
         />
       </van-cell-group>
 
       <van-cell-group>
-        <van-field
-          v-model="value5"
-          label="术后引流液淀粉酶（第1天）"
-          input-align="right"
-          center
-        >
+        <van-field v-model="value5" label="术后引流液淀粉酶（第1天）" center>
           <template v-slot:button>
             <van-button
               @click="addInput"
@@ -331,11 +326,13 @@
             ></van-button>
           </template>
         </van-field>
-      </van-cell-group>
 
-      <van-cell-group v-for="(value, index) in days" :key="index">
-        <van-field :label="value"></van-field
-      ></van-cell-group>
+        <van-field
+          v-for="(value, index) in days"
+          :key="index"
+          :label="value"
+        ></van-field>
+      </van-cell-group>
     </div>
     <!--          提交的按钮-->
     <div style="display: flex; justify-content: center; margin-top: 50px">
