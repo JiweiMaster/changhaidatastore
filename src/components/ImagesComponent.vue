@@ -213,7 +213,6 @@
         <van-uploader
           v-model="fileList"
           :after-read="afterRead"
-          multiple
           :max-count="1"
         />
       </div>
@@ -244,11 +243,19 @@
     </div>
     <!--          提交的按钮-->
     <div style="display: flex; justify-content: center; margin-top: 50px">
-      <van-button round type="info" style="width: 80px">取消</van-button>
-      <van-button round type="info" style="margin: auto 20px; width: 80px"
+      <van-button round type="info" style="width: 80px" v-on:click="cancelBtn()"
+        >取消</van-button
+      >
+      <van-button
+        round
+        type="info"
+        style="margin: auto 20px; width: 80px"
+        v-on:click="saveBtn()"
         >保存</van-button
       >
-      <van-button round type="info" style="width: 80px">上传</van-button>
+      <van-button round type="info" style="width: 80px" v-on:click="uploadBtn()"
+        >上传</van-button
+      >
       <div></div>
     </div>
   </div>
@@ -422,7 +429,33 @@
       afterRead(file) {
         // 此时可以自行将文件上传至服务器
         console.log(file)
-      }
+      },
+
+      cancelBtn() {
+        this.$root.currentRoute = '/DataManage'
+      },
+      saveBtn() {
+        this.$emit(
+          'saveImages',
+          this.zlsm,
+          this.zdzj,
+          this.fieldValue01,
+          this.fieldValue02,
+          this.fieldValue03,
+          this.fieldValue04,
+          this.fieldValue05,
+          this.fieldValue06,
+          this.fieldValue07,
+          this.fieldValue08,
+          this.fieldValue09,
+          this.zygzj,
+          this.fieldValue10,
+          this.fileList[0],
+          this.message1,
+          this.message2
+        )
+      },
+      uploadBtn() {}
     }
   }
 </script>

@@ -70,8 +70,18 @@
       }
     },
     methods: {
-      cancelBtn() {},
-      saveBtn() {},
+      cancelBtn() {
+        this.$root.currentRoute = '/DataManage'
+      },
+      saveBtn() {
+        this.$emit(
+          'saveBase',
+          this.hospitalNum,
+          this.patientName,
+          this.patientAge,
+          this.patientGender
+        )
+      },
       uploadBtn() {}
     }
   }

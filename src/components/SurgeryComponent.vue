@@ -316,7 +316,12 @@
       </van-cell-group>
 
       <van-cell-group>
-        <van-field v-model="value5" label="术后引流液淀粉酶（第1天）" center>
+        <van-field
+          v-model="value5"
+          label="术后引流液淀粉酶（第1天）"
+          placeholder="请选择每日中最高的引流液淀粉酶填写"
+          center
+        >
           <template v-slot:button>
             <van-button
               @click="addInput"
@@ -336,11 +341,19 @@
     </div>
     <!--          提交的按钮-->
     <div style="display: flex; justify-content: center; margin-top: 50px">
-      <van-button round type="info" style="width: 80px">取消</van-button>
-      <van-button round type="info" style="margin: auto 20px; width: 80px"
+      <van-button round type="info" style="width: 80px" v-on:click="cancelBtn()"
+        >取消</van-button
+      >
+      <van-button
+        round
+        type="info"
+        style="margin: auto 20px; width: 80px"
+        v-on:click="saveBtn()"
         >保存</van-button
       >
-      <van-button round type="info" style="width: 80px">上传</van-button>
+      <van-button round type="info" style="width: 80px" v-on:click="uploadBtn()"
+        >上传</van-button
+      >
       <div></div>
     </div>
   </div>
@@ -645,15 +658,44 @@
         } else {
           this.days.push('术后引流液淀粉酶（第' + ++this.day + '天）')
         }
-      }
+      },
+
+      cancelBtn() {
+        this.$root.currentRoute = '/DataManage'
+      },
+      saveBtn() {
+        this.$emit(
+          'saveSurgery',
+          this.fieldValue01,
+          this.value_cascader1, //其他选项中的值
+          this.fieldValue02,
+          this.fieldValue03,
+          this.value_cascader2, //其他选项中的值
+          this.fieldValue04,
+          this.value1,
+          this.value2,
+          this.value3,
+          this.fieldValue05,
+          this.fieldValue06,
+          this.fieldValue07,
+          this.fieldValue08,
+          this.fieldValue09,
+          this.fieldValue10,
+          this.fieldValue11,
+          this.fieldValue12,
+          this.fieldValue13,
+          this.fieldValue14,
+          this.fieldValue15,
+          this.value4,
+          this.value5
+        )
+      },
+      uploadBtn() {}
     }
   }
 </script>
 
 <style>
-  /* .sugery-item.van-cell-group.van-cell.van-field__label {
-                  width: 8em !important;
-                } */
   .van-field__control {
     text-align: right !important;
   }

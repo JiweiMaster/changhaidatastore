@@ -172,11 +172,19 @@
     </div>
     <!--          提交的按钮-->
     <div style="display: flex; justify-content: center; margin-top: 50px">
-      <van-button round type="info" style="width: 80px">取消</van-button>
-      <van-button round type="info" style="margin: auto 20px; width: 80px"
+      <van-button round type="info" style="width: 80px" v-on:click="cancelBtn()"
+        >取消</van-button
+      >
+      <van-button
+        round
+        type="info"
+        style="margin: auto 20px; width: 80px"
+        v-on:click="saveBtn()"
         >保存</van-button
       >
-      <van-button round type="info" style="width: 80px">上传</van-button>
+      <van-button round type="info" style="width: 80px" v-on:click="uploadBtn()"
+        >上传</van-button
+      >
     </div>
   </div>
 </template>
@@ -376,7 +384,30 @@
       onFinish6({ selectedOptions }) {
         this.show6 = false
         this.fieldValue6 = selectedOptions[selectedOptions.length - 1].text
-      }
+      },
+
+      cancelBtn() {
+        this.$root.currentRoute = '/DataManage'
+      },
+      saveBtn() {
+        this.$emit(
+          'savePathology',
+          this.fieldValue,
+          this.value_cascader,
+          this.value1,
+          this.fieldValue1,
+          this.fieldValue2,
+          this.fieldValue3,
+          this.fieldValue4,
+          this.fieldValue5,
+          this.value2,
+          this.value3,
+          this.fieldValue6,
+          this.value4,
+          this.value5
+        )
+      },
+      uploadBtn() {}
     }
   }
 </script>
