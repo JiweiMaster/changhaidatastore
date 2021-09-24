@@ -71,7 +71,7 @@
     },
     methods: {
       cancelBtn() {
-        this.$root.currentRoute = '/DataManage'
+        this.$router.back()
       },
       saveBtn() {
         this.$emit(

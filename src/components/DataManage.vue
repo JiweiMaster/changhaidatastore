@@ -6,22 +6,17 @@
       left-arrow
       @click-left="returnLastPage()"
     />
-    <div style="margin-top: 70vh; margin-left: 70vw">
-      <van-button
-        round
-        type="info"
-        width="3rem"
-        height="3rem"
-        icon="edit"
-        v-on:click="newData()"
-      ></van-button>
-    </div>
-    <van-tabbar v-model="active">
-      <van-tabbar-item icon="add-o">新建</van-tabbar-item>
-      <van-tabbar-item icon="todo-list-o" v-on:click="edit()"
+    <router-view />
+    <van-tabbar route>
+      <van-tabbar-item to="/DataManage/AddItem" icon="add-o"
+        >新建</van-tabbar-item
+      >
+      <van-tabbar-item to="/DataManage/EditingItem" icon="todo-list-o"
         >编辑中</van-tabbar-item
       >
-      <van-tabbar-item icon="passed">已上传</van-tabbar-item>
+      <van-tabbar-item to="/DataManage/UploadedItem" icon="passed"
+        >已上传</van-tabbar-item
+      >
     </van-tabbar>
   </div>
 </template>
@@ -29,25 +24,9 @@
 <script>
   export default {
     name: 'DataManage',
-    components: {},
-    props: {
-      msg: String
-    },
-    data() {
-      return {
-        active: 0
-      }
-    },
     methods: {
       returnLastPage() {
-        this.$root.currentRoute = '/'
-      },
-      newData() {
-        console.log('new 一个新的病例数据' + this.href)
-        this.$root.currentRoute = '/BaseInfo'
-      },
-      edit() {
-        // this.$root.currentRoute = '/Editing'
+        this.$router.push('/')
       }
     }
   }
@@ -55,14 +34,6 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-  .van-button {
-    padding: 0 13px !important;
-    font-size: 14px !important;
-  }
-  .van-button--round {
-    border-radius: 99px !important;
-  }
-
   .van-nav-bar {
     background-color: #913935 !important;
   }
@@ -75,14 +46,9 @@
   .van-nav-bar__title {
     color: #fff !important;
   }
-  .van-button--info {
-    background-color: #913935 !important;
-    border: 1px solid #913935 !important;
-  }
   .van-tabbar-item--active {
     color: #913935 !important;
   }
-
   h3 {
     margin: 40px 0 0;
   }

@@ -14,13 +14,9 @@
 <script>
   export default {
     name: 'HomePage',
-    components: {},
-    data() {
-      return {}
-    },
     methods: {
       enterSys() {
-        this.$root.currentRoute = '/DataManage'
+        this.$router.push('/DataManage/AddItem')
       }
     }
   }
