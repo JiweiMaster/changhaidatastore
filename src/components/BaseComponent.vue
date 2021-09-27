@@ -40,17 +40,17 @@
     </div>
     <!--          提交的按钮-->
     <div style="display: flex; justify-content: center; margin-top: 50px">
-      <van-button round type="info" style="width: 80px" v-on:click="cancelBtn()"
+      <van-button round type="info" style="width: 80px" v-on:click="cancelBtn"
         >取消</van-button
       >
       <van-button
         round
         type="info"
         style="margin: auto 20px; width: 80px"
-        v-on:click="saveBtn()"
+        v-on:click="saveBtn"
         >保存</van-button
       >
-      <van-button round type="info" style="width: 80px" v-on:click="uploadBtn()"
+      <van-button round type="info" style="width: 80px" v-on:click="uploadBtn"
         >上传</van-button
       >
       <div></div>
@@ -59,6 +59,7 @@
 </template>
 
 <script>
+  import { Notify } from 'vant'
   export default {
     name: 'BaseComponent.vue',
     data() {
@@ -69,20 +70,33 @@
         patientGender: ''
       }
     },
+    props: { id: String },
     methods: {
       cancelBtn() {
         this.$router.back()
       },
       saveBtn() {
-        this.$emit(
-          'saveBase',
-          this.hospitalNum,
-          this.patientName,
-          this.patientAge,
-          this.patientGender
-        )
+        if (this.id != '') {
+          this.$emit('saveItem')
+          this.$router.replace('/DataManage/EditingItem')
+        } else
+          Notify({
+            message: '保存失败，必须输入住院号！',
+            duration: 1000,
+            color: 'black',
+            background: '#ffe1e1'
+          })
       },
       uploadBtn() {}
+    },
+    updated() {
+      this.$emit(
+        'saveBase',
+        this.hospitalNum,
+        this.patientName,
+        this.patientAge,
+        this.patientGender
+      )
     }
   }
 </script>

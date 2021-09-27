@@ -2,19 +2,34 @@
   <div>
     <van-tabs v-model="active">
       <van-tab title="基本"
-        ><BaseComponent @saveBase="handleSaveBase"
+        ><BaseComponent
+          @saveBase="handleSaveBase"
+          @saveItem="handleSave"
+          :id="this.base.baseHospitalNum"
       /></van-tab>
       <van-tab title="化验"
-        ><AnalysisComponent @saveAnalysis="handleSaveAnalysis"
+        ><AnalysisComponent
+          @saveAnalysis="handleSaveAnalysis"
+          @saveItem="handleSave"
+          :id="this.base.baseHospitalNum"
       /></van-tab>
       <van-tab title="影像"
-        ><ImagesComponent @saveImages="handleSaveImages"
+        ><ImagesComponent
+          @saveImages="handleSaveImages"
+          @saveItem="handleSave"
+          :id="this.base.baseHospitalNum"
       /></van-tab>
       <van-tab title="手术"
-        ><SurgeryComponent @saveSurgery="handleSaveSurgery"
+        ><SurgeryComponent
+          @saveSurgery="handleSaveSurgery"
+          @saveItem="handleSave"
+          :id="this.base.baseHospitalNum"
       /></van-tab>
       <van-tab title="病理"
-        ><PathologyComponent @savePathology="handleSavePathology"
+        ><PathologyComponent
+          @savePathology="handleSavePathology"
+          @saveItem="handleSave"
+          :id="this.base.baseHospitalNum"
       /></van-tab>
     </van-tabs>
   </div>
@@ -114,6 +129,8 @@
 
         pathology: {
           pathology_blzd: '',
+          pathology_blzd_IPMN_1: '',
+          pathology_blzd_IPMN_2: '',
           pathology_blzd_other: '',
           pathology_zdzj: '',
           pathology_yxcd: '',
@@ -130,12 +147,7 @@
       }
     },
     methods: {
-      handleSaveBase(hospitalNum, patientName, patientAge, patientGender) {
-        this.base.baseHospitalNum = hospitalNum
-        this.base.basePatientName = patientName
-        this.base.basePatientAge = patientAge
-        this.base.basePatientGender = patientGender
-
+      handleSave() {
         let temp = {
           ...this.base,
           ...this.analysis,
@@ -143,7 +155,36 @@
           ...this.surgery,
           ...this.pathology
         }
-        localStorage.setItem(hospitalNum, JSON.stringify(temp))
+        localStorage.removeItem(this.base.baseHospitalNum) //ios系统可能需要先移除之前的项
+        localStorage.setItem(this.base.baseHospitalNum, JSON.stringify(temp))
+      },
+
+      handleSaveBase(hospitalNum, patientName, patientAge, patientGender) {
+        // if (
+        //   this.base.baseHospitalNum != '' &&
+        //   this.base.baseHospitalNum != hospitalNum
+        // ) {
+        //   Object.keys(this.base).forEach((key) => {
+        //     this.base[key] = ''
+        //   })
+        //   Object.keys(this.analysis).forEach((key) => {
+        //     this.analysis[key] = ''
+        //   })
+        //   Object.keys(this.images).forEach((key) => {
+        //     this.images[key] = ''
+        //   })
+        //   Object.keys(this.surgery).forEach((key) => {
+        //     this.surgery[key] = ''
+        //   })
+        //   Object.keys(this.pathology).forEach((key) => {
+        //     this.pathology[key] = ''
+        //   })
+        // }
+
+        this.base.baseHospitalNum = hospitalNum
+        this.base.basePatientName = patientName
+        this.base.basePatientAge = patientAge
+        this.base.basePatientGender = patientGender
       },
       handleSaveAnalysis(analysis) {
         this.analysis.analysis_WBC = analysis.value01
@@ -164,16 +205,6 @@
         this.analysis.analysis_CA125 = analysis.value16
         this.analysis.analysis_CA724 = analysis.value17
         this.analysis.analysis_IgG4 = analysis.value18
-
-        let temp = {
-          ...this.base,
-          ...this.analysis,
-          ...this.images,
-          ...this.surgery,
-          ...this.pathology
-        }
-
-        localStorage.setItem(this.base.baseHospitalNum, JSON.stringify(temp))
       },
       handleSaveImages() {
         this.images.images_zlsm = arguments[0]
@@ -192,16 +223,6 @@
         this.images.images_picture = arguments[13]
         this.images.images_yxkzd = arguments[14]
         this.images.images_yxwksqzd = arguments[15]
-
-        let temp = {
-          ...this.base,
-          ...this.analysis,
-          ...this.images,
-          ...this.surgery,
-          ...this.pathology
-        }
-
-        localStorage.setItem(this.base.baseHospitalNum, JSON.stringify(temp))
       },
       handleSaveSurgery() {
         this.surgery.surgery_ssfs = arguments[0]
@@ -226,41 +247,25 @@
         this.surgery.surgery_wsqsw = arguments[19]
         this.surgery.surgery_shzyts = arguments[20]
         this.surgery.surgery_shylydfm[0] = arguments[21]
-
-        let temp = {
-          ...this.base,
-          ...this.analysis,
-          ...this.images,
-          ...this.surgery,
-          ...this.pathology
-        }
-
-        localStorage.setItem(this.base.baseHospitalNum, JSON.stringify(temp))
       },
       handleSavePathology() {
         this.pathology.pathology_blzd = arguments[0]
-        this.pathology.pathology_blzd_other = arguments[1]
-        this.pathology.pathology_zdzj = arguments[2]
-        this.pathology.pathology_yxcd = arguments[3]
-        this.pathology.pathology_qyzdysyx = arguments[4]
-        this.pathology.pathology_mgqf = arguments[5]
-        this.pathology.pathology_yzzfjr = arguments[6]
-        this.pathology.pathology_dxgqf = arguments[7]
-        this.pathology.pathology_zlbjs = arguments[8]
-        this.pathology.pathology_yxlbjs = arguments[9]
-        this.pathology.pathology_qtzqzy = arguments[10]
-        this.pathology.pathology_Ki67 = arguments[11]
-        this.pathology.pathology_qtbz = arguments[12]
+        this.pathology.pathology_blzd_IPMN_1 = arguments[1]
+        this.pathology.pathology_blzd_IPMN_2 = arguments[2]
+        this.pathology.pathology_blzd_other = arguments[3]
+        this.pathology.pathology_zdzj = arguments[4]
+        this.pathology.pathology_yxcd = arguments[5]
+        this.pathology.pathology_qyzdysyx = arguments[6]
+        this.pathology.pathology_mgqf = arguments[7]
+        this.pathology.pathology_yzzfjr = arguments[8]
+        this.pathology.pathology_dxgqf = arguments[9]
+        this.pathology.pathology_zlbjs = arguments[10]
+        this.pathology.pathology_yxlbjs = arguments[11]
+        this.pathology.pathology_qtzqzy = arguments[12]
+        this.pathology.pathology_Ki67 = arguments[13]
+        this.pathology.pathology_qtbz = arguments[14]
 
-        let temp = {
-          ...this.base,
-          ...this.analysis,
-          ...this.images,
-          ...this.surgery,
-          ...this.pathology
-        }
-
-        localStorage.setItem(this.base.baseHospitalNum, JSON.stringify(temp))
+        // this.$options.methods.uploadToLocal.bind(this)()
       }
     }
   }

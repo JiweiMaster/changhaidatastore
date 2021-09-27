@@ -319,7 +319,7 @@
         <van-field
           v-model="value5"
           label="术后引流液淀粉酶（第1天）"
-          placeholder="请选择每日中最高的引流液淀粉酶填写"
+          placeholder="选择每日中最高的引流液淀粉酶填写"
           center
         >
           <template v-slot:button>
@@ -340,18 +340,25 @@
       </van-cell-group>
     </div>
     <!--          提交的按钮-->
-    <div style="display: flex; justify-content: center; margin-top: 50px">
-      <van-button round type="info" style="width: 80px" v-on:click="cancelBtn()"
+    <div
+      style="
+        display: flex;
+        justify-content: center;
+        margin-top: 50px;
+        margin-bottom: 5vh;
+      "
+    >
+      <van-button round type="info" style="width: 80px" v-on:click="cancelBtn"
         >取消</van-button
       >
       <van-button
         round
         type="info"
         style="margin: auto 20px; width: 80px"
-        v-on:click="saveBtn()"
+        v-on:click="saveBtn"
         >保存</van-button
       >
-      <van-button round type="info" style="width: 80px" v-on:click="uploadBtn()"
+      <van-button round type="info" style="width: 80px" v-on:click="uploadBtn"
         >上传</van-button
       >
       <div></div>
@@ -360,7 +367,7 @@
 </template>
 
 <script>
-  //  import { Toast } from 'vant'
+  import { Notify } from 'vant'
 
   export default {
     name: 'SurgeryComponent.vue',
@@ -589,68 +596,71 @@
         day: 1 //供for使用
       }
     },
+    props: { id: String },
     methods: {
       onFinish01({ selectedOptions }) {
         this.show01 = false
-        this.fieldValue01 = selectedOptions[selectedOptions.length - 1].text
+        this.fieldValue01 = selectedOptions.map((option) => option.text).join('/')
         if (selectedOptions[0].value === '700') this.show_other1 = true
+        else this.show_other1 = false
       },
       onFinish02({ selectedOptions }) {
         this.show02 = false
-        this.fieldValue02 = selectedOptions[selectedOptions.length - 1].text
+        this.fieldValue02 = selectedOptions.map((option) => option.text).join('/')
       },
       onFinish03({ selectedOptions }) {
         this.show03 = false
-        this.fieldValue03 = selectedOptions[selectedOptions.length - 1].text
+        this.fieldValue03 = selectedOptions.map((option) => option.text).join('/')
         if (selectedOptions[2].value === '113') this.show_other2 = true
+        else this.show_other2 = false
       },
       onFinish04({ selectedOptions }) {
         this.show04 = false
-        this.fieldValue04 = selectedOptions[selectedOptions.length - 1].text
+        this.fieldValue04 = selectedOptions.map((option) => option.text).join('/')
       },
       onFinish05({ selectedOptions }) {
         this.show05 = false
-        this.fieldValue05 = selectedOptions[selectedOptions.length - 1].text
+        this.fieldValue05 = selectedOptions.map((option) => option.text).join('/')
       },
       onFinish06({ selectedOptions }) {
         this.show06 = false
-        this.fieldValue06 = selectedOptions[selectedOptions.length - 1].text
+        this.fieldValue06 = selectedOptions.map((option) => option.text).join('/')
       },
       onFinish07({ selectedOptions }) {
         this.show07 = false
-        this.fieldValue07 = selectedOptions[selectedOptions.length - 1].text
+        this.fieldValue07 = selectedOptions.map((option) => option.text).join('/')
       },
       onFinish08({ selectedOptions }) {
         this.show08 = false
-        this.fieldValue08 = selectedOptions[selectedOptions.length - 1].text
+        this.fieldValue08 = selectedOptions.map((option) => option.text).join('/')
       },
       onFinish09({ selectedOptions }) {
         this.show09 = false
-        this.fieldValue09 = selectedOptions[selectedOptions.length - 1].text
+        this.fieldValue09 = selectedOptions.map((option) => option.text).join('/')
       },
       onFinish10({ selectedOptions }) {
         this.show10 = false
-        this.fieldValue10 = selectedOptions[selectedOptions.length - 1].text
+        this.fieldValue10 = selectedOptions.map((option) => option.text).join('/')
       },
       onFinish11({ selectedOptions }) {
         this.show11 = false
-        this.fieldValue11 = selectedOptions[selectedOptions.length - 1].text
+        this.fieldValue11 = selectedOptions.map((option) => option.text).join('/')
       },
       onFinish12({ selectedOptions }) {
         this.show12 = false
-        this.fieldValue12 = selectedOptions[selectedOptions.length - 1].text
+        this.fieldValue12 = selectedOptions.map((option) => option.text).join('/')
       },
       onFinish13({ selectedOptions }) {
         this.show13 = false
-        this.fieldValue13 = selectedOptions[selectedOptions.length - 1].text
+        this.fieldValue13 = selectedOptions.map((option) => option.text).join('/')
       },
       onFinish14({ selectedOptions }) {
         this.show14 = false
-        this.fieldValue14 = selectedOptions[selectedOptions.length - 1].text
+        this.fieldValue14 = selectedOptions.map((option) => option.text).join('/')
       },
       onFinish15({ selectedOptions }) {
         this.show15 = false
-        this.fieldValue15 = selectedOptions[selectedOptions.length - 1].text
+        this.fieldValue15 = selectedOptions.map((option) => option.text).join('/')
       },
       addInput() {
         if (this.day >= 7) {
@@ -664,33 +674,45 @@
         this.$router.back()
       },
       saveBtn() {
-        this.$emit(
-          'saveSurgery',
-          this.fieldValue01,
-          this.value_cascader1, //其他选项中的值
-          this.fieldValue02,
-          this.fieldValue03,
-          this.value_cascader2, //其他选项中的值
-          this.fieldValue04,
-          this.value1,
-          this.value2,
-          this.value3,
-          this.fieldValue05,
-          this.fieldValue06,
-          this.fieldValue07,
-          this.fieldValue08,
-          this.fieldValue09,
-          this.fieldValue10,
-          this.fieldValue11,
-          this.fieldValue12,
-          this.fieldValue13,
-          this.fieldValue14,
-          this.fieldValue15,
-          this.value4,
-          this.value5
-        )
+        if (this.id != '') {
+          this.$emit('saveItem')
+          this.$router.replace('/DataManage/EditingItem')
+        } else
+          Notify({
+            message: '保存失败，必须输入住院号！',
+            duration: 1000,
+            color: 'black',
+            background: '#ffe1e1'
+          })
       },
       uploadBtn() {}
+    },
+    updated() {
+      this.$emit(
+        'saveSurgery',
+        this.fieldValue01,
+        this.value_cascader1, //其他选项中的值
+        this.fieldValue02,
+        this.fieldValue03,
+        this.value_cascader2, //其他选项中的值
+        this.fieldValue04,
+        this.value1,
+        this.value2,
+        this.value3,
+        this.fieldValue05,
+        this.fieldValue06,
+        this.fieldValue07,
+        this.fieldValue08,
+        this.fieldValue09,
+        this.fieldValue10,
+        this.fieldValue11,
+        this.fieldValue12,
+        this.fieldValue13,
+        this.fieldValue14,
+        this.fieldValue15,
+        this.value4,
+        this.value5
+      )
     }
   }
 </script>

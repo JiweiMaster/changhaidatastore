@@ -39,7 +39,7 @@
     border: 1px solid #913935 !important;
   }
   img {
-    margin: 45vh auto;
+    margin-top: 45vh;
     width: 90vw;
     bottom: 0;
   }

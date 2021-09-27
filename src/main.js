@@ -10,6 +10,7 @@ import router from './routes'
 
 Vue.use(Vant);
 
+
 new Vue({
   el: '#app',
   render: h => h(App),

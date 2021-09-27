@@ -20,6 +20,39 @@
         </van-popup>
 
         <van-field
+          v-if="this.show_IPMN_1 === true"
+          v-model="fieldValue_IPMN_1"
+          is-link
+          readonly
+          label="IPMN型态1"
+          @click="show_IPMN_1_cascader = true"
+        />
+        <van-popup v-model="show_IPMN_1_cascader" position="bottom">
+          <van-cascader
+            v-model="cascaderValue_IPMN_1"
+            :options="options_IPMN_1"
+            @close="show_IPMN_1_cascader = false"
+            @finish="onFinish_IPMN_1"
+          />
+        </van-popup>
+        <van-field
+          v-if="this.show_IPMN_2 === true"
+          v-model="fieldValue_IPMN_2"
+          is-link
+          readonly
+          label="IPMN型态2"
+          @click="show_IPMN_2_cascader = true"
+        />
+        <van-popup v-model="show_IPMN_2_cascader" position="bottom">
+          <van-cascader
+            v-model="cascaderValue_IPMN_2"
+            :options="options_IPMN_2"
+            @close="show_IPMN_2_cascader = false"
+            @finish="onFinish_IPMN_2"
+          />
+        </van-popup>
+
+        <van-field
           v-if="this.show_other === true"
           v-model="value_cascader"
           label="其他"
@@ -171,18 +204,25 @@
       </van-cell-group>
     </div>
     <!--          提交的按钮-->
-    <div style="display: flex; justify-content: center; margin-top: 50px">
-      <van-button round type="info" style="width: 80px" v-on:click="cancelBtn()"
+    <div
+      style="
+        display: flex;
+        justify-content: center;
+        margin-top: 50px;
+        margin-bottom: 5vh;
+      "
+    >
+      <van-button round type="info" style="width: 80px" v-on:click="cancelBtn"
         >取消</van-button
       >
       <van-button
         round
         type="info"
         style="margin: auto 20px; width: 80px"
-        v-on:click="saveBtn()"
+        v-on:click="saveBtn"
         >保存</van-button
       >
-      <van-button round type="info" style="width: 80px" v-on:click="uploadBtn()"
+      <van-button round type="info" style="width: 80px" v-on:click="uploadBtn"
         >上传</van-button
       >
     </div>
@@ -190,12 +230,10 @@
 </template>
 
 <script>
+  import { Notify } from 'vant'
   export default {
     name: 'PathologyComponent.vue',
     components: {},
-    props: {
-      msg: String
-    },
     data() {
       return {
         show: false,
@@ -216,25 +254,29 @@
             value: '200'
           },
           {
-            text: '胰腺导管内乳头状粘液性瘤（IPMN）型态1',
-            value: '300',
-            children: [
-              { text: '主胰管型', value: '310' },
-              { text: '分支胰管型', value: '320' },
-              { text: '混合胰管型', value: '330' }
-            ]
+            text: '胰腺导管内乳头状粘液性瘤（IPMN）',
+            value: '300'
           },
-          {
-            text: '胰腺导管内乳头状粘液性瘤（IPMN）型态2',
-            value: '400',
-            children: [
-              { text: '胃型', value: '410' },
-              { text: '肠型', value: '420' },
-              { text: '胰胆管型', value: '430' },
-              { text: '嗜酸细胞型', value: '440' },
-              { text: '未报告/不详', value: '450' }
-            ]
-          },
+          // {
+          //   text: '胰腺导管内乳头状粘液性瘤（IPMN）型态1',
+          //   value: '300',
+          //   children: [
+          //     { text: '主胰管型', value: '310' },
+          //     { text: '分支胰管型', value: '320' },
+          //     { text: '混合胰管型', value: '330' }
+          //   ]
+          // },
+          // {
+          //   text: '胰腺导管内乳头状粘液性瘤（IPMN）型态2',
+          //   value: '400',
+          //   children: [
+          //     { text: '胃型', value: '410' },
+          //     { text: '肠型', value: '420' },
+          //     { text: '胰胆管型', value: '430' },
+          //     { text: '嗜酸细胞型', value: '440' },
+          //     { text: '未报告/不详', value: '450' }
+          //   ]
+          // },
           {
             text: '胰腺实性假乳头状肿瘤（SPN）',
             value: '500'
@@ -251,6 +293,27 @@
 
         show_other: false,
         value_cascader: '',
+
+        show_IPMN_1: false,
+        show_IPMN_1_cascader: false,
+        fieldValue_IPMN_1: '',
+        cascaderValue_IPMN_1: '',
+        options_IPMN_1: [
+          { text: '主胰管型', value: '100' },
+          { text: '分支胰管型', value: '200' },
+          { text: '混合胰管型', value: '300' }
+        ],
+        show_IPMN_2: false,
+        show_IPMN_2_cascader: false,
+        fieldValue_IPMN_2: '',
+        cascaderValue_IPMN_2: '',
+        options_IPMN_2: [
+          { text: '胃型', value: '100' },
+          { text: '肠型', value: '200' },
+          { text: '胰胆管型', value: '300' },
+          { text: '嗜酸细胞型', value: '400' },
+          { text: '未报告/不详', value: '500' }
+        ],
 
         value1: '',
         value2: '',
@@ -355,59 +418,88 @@
         ]
       }
     },
+    props: { id: String },
     methods: {
       onFinish({ selectedOptions }) {
         this.show = false
-        this.fieldValue = selectedOptions[selectedOptions.length - 1].text
-        if (selectedOptions[0].value === '700') this.show_other = true
+        this.fieldValue = selectedOptions.map((option) => option.text).join('/')
+        this.show_other = selectedOptions[0].value === '700' ? true : false
+        this.show_IPMN_1 = selectedOptions[0].value === '300' ? true : false
+        this.show_IPMN_2 = this.show_IPMN_1
+      },
+      onFinish_IPMN_1({ selectedOptions }) {
+        this.show_IPMN_1_cascader = false
+        this.fieldValue_IPMN_1 = selectedOptions
+          .map((option) => option.text)
+          .join('/')
+      },
+      onFinish_IPMN_2({ selectedOptions }) {
+        this.show_IPMN_2_cascader = false
+        this.fieldValue_IPMN_2 = selectedOptions
+          .map((option) => option.text)
+          .join('/')
       },
       onFinish1({ selectedOptions }) {
         this.show1 = false
-        this.fieldValue1 = selectedOptions[selectedOptions.length - 1].text
+        this.fieldValue1 = selectedOptions.map((option) => option.text).join('/')
       },
       onFinish2({ selectedOptions }) {
         this.show2 = false
-        this.fieldValue2 = selectedOptions[selectedOptions.length - 1].text
+        this.fieldValue2 = selectedOptions.map((option) => option.text).join('/')
       },
       onFinish3({ selectedOptions }) {
         this.show3 = false
-        this.fieldValue3 = selectedOptions[selectedOptions.length - 1].text
+        this.fieldValue3 = selectedOptions.map((option) => option.text).join('/')
       },
       onFinish4({ selectedOptions }) {
         this.show4 = false
-        this.fieldValue4 = selectedOptions[selectedOptions.length - 1].text
+        this.fieldValue4 = selectedOptions.map((option) => option.text).join('/')
       },
       onFinish5({ selectedOptions }) {
         this.show5 = false
-        this.fieldValue5 = selectedOptions[selectedOptions.length - 1].text
+        this.fieldValue5 = selectedOptions.map((option) => option.text).join('/')
       },
       onFinish6({ selectedOptions }) {
         this.show6 = false
-        this.fieldValue6 = selectedOptions[selectedOptions.length - 1].text
+        this.fieldValue6 = selectedOptions.map((option) => option.text).join('/')
       },
 
       cancelBtn() {
         this.$router.back()
       },
       saveBtn() {
-        this.$emit(
-          'savePathology',
-          this.fieldValue,
-          this.value_cascader,
-          this.value1,
-          this.fieldValue1,
-          this.fieldValue2,
-          this.fieldValue3,
-          this.fieldValue4,
-          this.fieldValue5,
-          this.value2,
-          this.value3,
-          this.fieldValue6,
-          this.value4,
-          this.value5
-        )
+        if (this.id != '') {
+          this.$emit('saveItem')
+          this.$router.replace('/DataManage/EditingItem')
+        } else
+          Notify({
+            message: '保存失败，必须输入住院号！',
+            duration: 1000,
+            color: 'black',
+            background: '#ffe1e1'
+          })
       },
       uploadBtn() {}
+    },
+    updated() {
+      this.$emit(
+        'savePathology',
+        this.fieldValue,
+        this.fieldValue_IPMN_1,
+        this.fieldValue_IPMN_2,
+        this.value_cascader, //其他项的输入值
+        this.value1,
+        this.fieldValue1,
+        this.fieldValue2,
+        this.fieldValue3,
+        this.fieldValue4,
+        this.fieldValue5,
+        this.value2,
+        this.value3,
+        this.fieldValue6,
+        this.value4,
+        this.value5
+      )
     }
   }
 </script>

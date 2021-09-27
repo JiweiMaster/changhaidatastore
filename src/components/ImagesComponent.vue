@@ -213,7 +213,7 @@
         <van-uploader
           v-model="fileList"
           :after-read="afterRead"
-          :max-count="1"
+          :max-count="4"
         />
       </div>
 
@@ -243,17 +243,17 @@
     </div>
     <!--          提交的按钮-->
     <div style="display: flex; justify-content: center; margin-top: 50px">
-      <van-button round type="info" style="width: 80px" v-on:click="cancelBtn()"
+      <van-button round type="info" style="width: 80px" v-on:click="cancelBtn"
         >取消</van-button
       >
       <van-button
         round
         type="info"
         style="margin: auto 20px; width: 80px"
-        v-on:click="saveBtn()"
+        v-on:click="saveBtn"
         >保存</van-button
       >
-      <van-button round type="info" style="width: 80px" v-on:click="uploadBtn()"
+      <van-button round type="info" style="width: 80px" v-on:click="uploadBtn"
         >上传</van-button
       >
       <div></div>
@@ -262,7 +262,7 @@
 </template>
 
 <script>
-  //  import { Toast } from 'vant'
+  import { Notify } from 'vant'
 
   export default {
     name: 'ImageComponent.vue',
@@ -382,80 +382,102 @@
           { text: '延迟相', value: '400' }
         ],
 
+        images: {
+          100: '',
+          200: '',
+          300: '',
+          400: ''
+        },
+
         fileList: []
       }
     },
+    props: { id: String },
     methods: {
       onFinish01({ selectedOptions }) {
         this.show01 = false
-        this.fieldValue01 = selectedOptions[selectedOptions.length - 1].text
+        this.fieldValue01 = selectedOptions.map((option) => option.text).join('/')
       },
       onFinish02({ selectedOptions }) {
         this.show02 = false
-        this.fieldValue02 = selectedOptions[selectedOptions.length - 1].text
+        this.fieldValue02 = selectedOptions.map((option) => option.text).join('/')
       },
       onFinish03({ selectedOptions }) {
         this.show03 = false
-        this.fieldValue03 = selectedOptions[selectedOptions.length - 1].text
+        this.fieldValue03 = selectedOptions.map((option) => option.text).join('/')
       },
       onFinish04({ selectedOptions }) {
         this.show04 = false
-        this.fieldValue04 = selectedOptions[selectedOptions.length - 1].text
+        this.fieldValue04 = selectedOptions.map((option) => option.text).join('/')
       },
       onFinish05({ selectedOptions }) {
         this.show05 = false
-        this.fieldValue05 = selectedOptions[selectedOptions.length - 1].text
+        this.fieldValue05 = selectedOptions.map((option) => option.text).join('/')
       },
       onFinish06({ selectedOptions }) {
         this.show06 = false
-        this.fieldValue06 = selectedOptions[selectedOptions.length - 1].text
+        this.fieldValue06 = selectedOptions.map((option) => option.text).join('/')
       },
       onFinish07({ selectedOptions }) {
         this.show07 = false
-        this.fieldValue07 = selectedOptions[selectedOptions.length - 1].text
+        this.fieldValue07 = selectedOptions.map((option) => option.text).join('/')
       },
       onFinish08({ selectedOptions }) {
         this.show08 = false
-        this.fieldValue08 = selectedOptions[selectedOptions.length - 1].text
+        this.fieldValue08 = selectedOptions.map((option) => option.text).join('/')
       },
       onFinish09({ selectedOptions }) {
         this.show09 = false
-        this.fieldValue09 = selectedOptions[selectedOptions.length - 1].text
+        this.fieldValue09 = selectedOptions.map((option) => option.text).join('/')
       },
       onFinish10({ selectedOptions }) {
         this.show10 = false
-        this.fieldValue10 = selectedOptions[selectedOptions.length - 1].text
+        this.fieldValue10 = selectedOptions.map((option) => option.text).join('/')
       },
       afterRead(file) {
         // 此时可以自行将文件上传至服务器
         console.log(file)
+        this.images[this.cascaderValue10] = file.content
+        console.log(this.images)
       },
 
       cancelBtn() {
         this.$router.back()
       },
       saveBtn() {
-        this.$emit(
-          'saveImages',
-          this.zlsm,
-          this.zdzj,
-          this.fieldValue01,
-          this.fieldValue02,
-          this.fieldValue03,
-          this.fieldValue04,
-          this.fieldValue05,
-          this.fieldValue06,
-          this.fieldValue07,
-          this.fieldValue08,
-          this.fieldValue09,
-          this.zygzj,
-          this.fieldValue10,
-          this.fileList[0],
-          this.message1,
-          this.message2
-        )
+        if (this.id != '') {
+          this.$emit('saveItem')
+          this.$router.replace('/DataManage/EditingItem')
+        } else
+          Notify({
+            message: '保存失败，必须输入住院号！',
+            duration: 1000,
+            color: 'black',
+            background: '#ffe1e1'
+          })
       },
       uploadBtn() {}
+    },
+    updated() {
+      this.$emit(
+        'saveImages',
+        this.zlsm,
+        this.zdzj,
+        this.fieldValue01,
+        this.fieldValue02,
+        this.fieldValue03,
+        this.fieldValue04,
+        this.fieldValue05,
+        this.fieldValue06,
+        this.fieldValue07,
+        this.fieldValue08,
+        this.fieldValue09,
+        this.zygzj,
+        this.fieldValue10,
+        this.fileList[0],
+        this.message1,
+        this.message2
+      )
     }
   }
 </script>
