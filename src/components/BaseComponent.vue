@@ -70,7 +70,7 @@
         patientGender: ''
       }
     },
-    props: { id: String },
+    props: { id: String, base: Object },
     methods: {
       cancelBtn() {
         this.$router.back()
@@ -87,7 +87,15 @@
             background: '#ffe1e1'
           })
       },
-      uploadBtn() {}
+      uploadBtn() {
+        this.$emit('uploadItem')
+      }
+    },
+    created() {
+      this.hospitalNum = this.base.baseHospitalNum
+      this.patientName = this.base.basePatientName
+      this.patientAge = this.base.basePatientAge
+      this.patientGender = this.base.basePatientGender
     },
     updated() {
       this.$emit(

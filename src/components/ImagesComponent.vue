@@ -209,12 +209,25 @@
         </van-popup>
       </van-cell-group>
 
-      <div style="margin-top: 5px; width: 90vw; text-align: right">
+      <div
+        style="
+          margin-top: 5px;
+          margin-left: 25vw;
+          width: 50vw;
+          text-align: center;
+        "
+      >
         <van-uploader
           v-model="fileList"
+          :before-read="asyncBeforeRead"
           :after-read="afterRead"
+          :before-delete="beforeDelete"
           :max-count="4"
-        />
+        >
+          <template #preview-cover="{ file }">
+            <div class="preview-cover van-ellipsis">{{ file.name }}</div>
+          </template></van-uploader
+        >
       </div>
 
       <van-cell-group>
@@ -382,17 +395,15 @@
           { text: '延迟相', value: '400' }
         ],
 
-        images: {
-          100: '',
-          200: '',
-          300: '',
-          400: ''
-        },
+        fileList: [
+          { url: 'https://img01.yzcdn.cn/vant/leaf.jpg' },
+          { url: 'https://img01.yzcdn.cn/vant/leaf.jpg' }
+        ],
 
-        fileList: []
+        qx_image_num: { 平扫相: 0, 动脉相: 0, 门静脉相: 0, 延迟相: 0 } //记录当前期相图像上传了几个
       }
     },
-    props: { id: String },
+    props: { id: String, images: Object },
     methods: {
       onFinish01({ selectedOptions }) {
         this.show01 = false
@@ -434,11 +445,45 @@
         this.show10 = false
         this.fieldValue10 = selectedOptions.map((option) => option.text).join('/')
       },
+
+      asyncBeforeRead(file) {
+        //修改文件名称,配合当前期相，将文件名变为xxx-1，xxx-2
+
+        return new Promise((resolve, reject) => {
+          if (this.fieldValue10 === '') {
+            Notify({
+              message: '请先选择图像的期相再上传对应图像！',
+              duration: 2000,
+              color: 'black',
+              background: '#ffe1e1'
+            })
+            reject()
+          } else {
+            let img = new File(
+              [file],
+              this.fieldValue10 + '-' + ++this.qx_image_num[this.fieldValue10],
+              {
+                type: 'image/jpeg'
+              }
+            )
+            resolve(img)
+          }
+        })
+      },
+
       afterRead(file) {
         // 此时可以自行将文件上传至服务器
-        console.log(file)
-        this.images[this.cascaderValue10] = file.content
-        console.log(this.images)
+        console.log(this.fileList)
+        console.log(file.file.name)
+        // this.read_images[this.cascaderValue10] = file.content
+        //console.log(this.read_images)
+      },
+
+      beforeDelete() {
+        //修改当前期相的上传图片数量
+        if (this.qx_image_num[this.fieldValue10] > 0)
+          this.qx_image_num[this.fieldValue10]--
+        return true
       },
 
       cancelBtn() {
@@ -456,7 +501,29 @@
             background: '#ffe1e1'
           })
       },
-      uploadBtn() {}
+      uploadBtn() {
+        this.$emit('uploadItem')
+      }
+    },
+    created() {
+      this.zlsm = this.images.images_zlsm
+      this.zdzj = this.images.images_zdzj
+      this.fieldValue01 = this.images.images_nbjj
+      this.fieldValue02 = this.images.images_ddn
+      this.fieldValue03 = this.images.images_nbqh
+      this.fieldValue04 = this.images.images_gh
+      this.fieldValue05 = this.images.images_sxcf
+      this.fieldValue06 = this.images.images_ydyxws
+      this.fieldValue07 = this.images.images_ydygkz
+      this.fieldValue08 = this.images.images_yxzwsc
+      this.fieldValue09 = this.images.images_yzygxt
+      this.zygzj = this.images.images_zygzj
+      this.fieldValue10 = this.images.images_ssqx
+      this.fileList = this.images.images_picture
+      this.message1 = this.images.images_yxkzd
+      this.message2 = this.images.images_yxwksqzd
+
+      this.qx_image_num = this.images.qx_image_num
     },
     updated() {
       this.$emit(
@@ -474,13 +541,26 @@
         this.fieldValue09,
         this.zygzj,
         this.fieldValue10,
-        this.fileList[0],
+        this.fileList,
         this.message1,
-        this.message2
+        this.message2,
+
+        this.qx_image_num //各期相图像数
       )
     }
   }
 </script>
 
 <style>
+  .preview-cover {
+    position: absolute;
+    bottom: 0;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 4px;
+    color: #fff;
+    font-size: 12px;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.3);
+  }
 </style>

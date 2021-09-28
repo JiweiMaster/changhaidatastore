@@ -13,14 +13,14 @@
       <div style="float: left">
         <p class="id">住院号：{{ item.baseHospitalNum }}</p>
         <p>
-          基本信息：{{ item.basePatientName }}，{{ item.basePatientGender }}，{{
-            item.basePatientAge
-          }}
+          基本信息：{{ item.basePatientName }}，{{
+            item.basePatientGender == '1' ? '男' : '女'
+          }}，{{ item.basePatientAge }}
         </p>
         <p>病理信息：{{ item.pathology_blzd }}</p>
       </div>
       <div>
-        <van-button class="btn" type="info" size="small" @click="editItem"
+        <van-button class="btn" type="info" size="small" @click="editItem(item)"
           >编辑</van-button
         >
         <van-button
@@ -36,6 +36,7 @@
 </template>
 
 <script>
+  import { Dialog } from 'vant'
   export default {
     name: 'EditingItem',
     props: {
@@ -47,7 +48,10 @@
       }
     },
     methods: {
-      editItem() {},
+      editItem(item) {
+        let id = item.baseHospitalNum
+        this.$router.push({ path: '/BaseInfo', query: { id: id } })
+      },
       uploadItem(item) {
         if (
           item.baseHospitalNum != '' &&
@@ -55,35 +59,40 @@
           item.basePatientGender != '' &&
           item.basePatientAge != '' &&
           item.pathology_blzd != ''
-        )
-          console.log('上传' + item)
+        ) {
+          Dialog.confirm({
+            title: '是否上传？'
+          })
+            .then(() => {
+              console.log('上传' + item)
+              localStorage.removeItem(item.baseHospitalNum)
+              this.$router.push('/DataManage/UploadedItem')
+            })
+            .catch(() => {})
+        } else
+          Dialog.alert({
+            message: '基本信息或病理信息不完整，请完善信息!'
+          }).then(() => {})
       }
     },
-    computed: {
-      filterData() {
-        console.log(this.patientInfo)
-        let item = [{ id: '', name: '', gender: '', age: '', pathological: '' }]
-        for (let i = 0; i < this.patientInfo.length; i++) {
-          item[i].id = this.patientInfo[i].baseHospitalNum
-          item[i].name = this.patientInfo[i].basePatientName
-          item[i].gender = this.patientInfo[i].basePatientGender
-          item[i].age = this.patientInfo[i].basePatientAge
-          if (this.patientInfo[i].pathology_blzd_other != '')
-            item[i].pathological = this.patientInfo[i].pathology_blzd_other
-          else item[i].pathological = this.patientInfo[i].pathology_blzd
-        }
-        console.log(item)
-        return item
-      }
-    },
-    mounted() {
+
+    created() {
       localStorage.removeItem('')
       localStorage.removeItem('loglevel:webpack-dev-server')
       this.patientInfo.length = 0
       for (let i = 0; i < localStorage.length; i++) {
         let temp = JSON.parse(localStorage.getItem(localStorage.key(i)))
         if (temp.pathology_blzd_other != '')
+          //如果是其他需要展示其他中输入的信息，不会影响localstorage中的存储
           temp.pathology_blzd = temp.pathology_blzd_other
+        if (temp.pathology_blzd == '胰腺导管内乳头状粘液性瘤（IPMN）')
+          temp.pathology_blzd =
+            temp.pathology_blzd +
+            '[' +
+            temp.pathology_blzd_IPMN_1 +
+            ';' +
+            temp.pathology_blzd_IPMN_2 +
+            ']'
         this.patientInfo.unshift(temp)
       }
     }

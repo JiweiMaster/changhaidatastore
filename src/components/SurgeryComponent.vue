@@ -317,7 +317,7 @@
 
       <van-cell-group>
         <van-field
-          v-model="value5"
+          v-model="value5[0]"
           label="术后引流液淀粉酶（第1天）"
           placeholder="选择每日中最高的引流液淀粉酶填写"
           center
@@ -333,9 +333,10 @@
         </van-field>
 
         <van-field
-          v-for="(value, index) in days"
+          v-for="(item, index) in days"
           :key="index"
-          :label="value"
+          :label="item"
+          v-model="value5[index + 1]"
         ></van-field>
       </van-cell-group>
     </div>
@@ -491,7 +492,7 @@
         value2: '',
         value3: '',
         value4: '',
-        value5: '',
+        value5: [], //新加输入框的填写值
 
         show05: false,
         fieldValue05: '',
@@ -596,7 +597,7 @@
         day: 1 //供for使用
       }
     },
-    props: { id: String },
+    props: { id: String, surgery: Object },
     methods: {
       onFinish01({ selectedOptions }) {
         this.show01 = false
@@ -671,7 +672,7 @@
       },
 
       cancelBtn() {
-        this.$router.back()
+        this.$router.back() //返回添加界面或者编辑界面
       },
       saveBtn() {
         if (this.id != '') {
@@ -685,7 +686,36 @@
             background: '#ffe1e1'
           })
       },
-      uploadBtn() {}
+      uploadBtn() {
+        this.$emit('uploadItem')
+      }
+    },
+    created() {
+      if (this.surgery.surgery_ssfs === '其他') this.show_other1 = true
+      if (this.surgery.surgery_ycwhfs === '有胰肠吻合/吻合方式/其他')
+        this.show_other2 = true
+      this.fieldValue01 = this.surgery.surgery_ssfs
+      this.value_cascader1 = this.surgery.surgery_ssfs_other
+      this.fieldValue02 = this.surgery.surgery_sstj
+      this.fieldValue03 = this.surgery.surgery_ycwhfs
+      this.value_cascader2 = this.surgery.surgery_ycwhfs_other
+      this.fieldValue04 = this.surgery.surgery_yczd
+      this.value1 = this.surgery.surgery_sssj
+      this.value2 = this.surgery.surgery_szcx
+      this.value3 = this.surgery.surgery_sxl
+      this.fieldValue05 = this.surgery.surgery_mjmzh
+      this.fieldValue06 = this.surgery.surgery_POPF
+      this.fieldValue07 = this.surgery.surgery_DGE
+      this.fieldValue08 = this.surgery.surgery_PPH
+      this.fieldValue09 = this.surgery.surgery_dl
+      this.fieldValue10 = this.surgery.surgery_rml
+      this.fieldValue11 = this.surgery.surgery_fqgr
+      this.fieldValue12 = this.surgery.surgery_VTEorPE
+      this.fieldValue13 = this.surgery.surgery_yylccyl
+      this.fieldValue14 = this.surgery.surgery_fjhecss
+      this.fieldValue15 = this.surgery.surgery_wsqsw
+      this.value4 = this.surgery.surgery_shzyts
+      this.value5 = this.surgery.surgery_shylydfm
     },
     updated() {
       this.$emit(

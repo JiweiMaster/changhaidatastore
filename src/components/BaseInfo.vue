@@ -5,37 +5,49 @@
         ><BaseComponent
           @saveBase="handleSaveBase"
           @saveItem="handleSave"
+          @uploadItem="handleUpload"
           :id="this.base.baseHospitalNum"
+          :base="this.base"
       /></van-tab>
       <van-tab title="化验"
         ><AnalysisComponent
           @saveAnalysis="handleSaveAnalysis"
           @saveItem="handleSave"
+          @uploadItem="handleUpload"
           :id="this.base.baseHospitalNum"
+          :analysis_prop="this.analysis"
       /></van-tab>
       <van-tab title="影像"
         ><ImagesComponent
           @saveImages="handleSaveImages"
           @saveItem="handleSave"
+          @uploadItem="handleUpload"
           :id="this.base.baseHospitalNum"
+          :images="this.images"
       /></van-tab>
       <van-tab title="手术"
         ><SurgeryComponent
           @saveSurgery="handleSaveSurgery"
           @saveItem="handleSave"
+          @uploadItem="handleUpload"
           :id="this.base.baseHospitalNum"
+          :surgery="this.surgery"
       /></van-tab>
       <van-tab title="病理"
         ><PathologyComponent
           @savePathology="handleSavePathology"
           @saveItem="handleSave"
+          @uploadItem="handleUpload"
           :id="this.base.baseHospitalNum"
+          :pathology="this.pathology"
       /></van-tab>
     </van-tabs>
   </div>
 </template>
 
 <script>
+  import { Dialog } from 'vant'
+
   import BaseComponent from './BaseComponent'
   import AnalysisComponent from './AnalysisComponent'
   import ImagesComponent from './ImagesComponent'
@@ -97,9 +109,11 @@
           images_yzygxt: '',
           images_zygzj: '',
           images_ssqx: '',
-          images_picture: '',
+          images_picture: [],
           images_yxkzd: '',
-          images_yxwksqzd: ''
+          images_yxwksqzd: '',
+
+          qx_image_num: { 平扫相: 0, 动脉相: 0, 门静脉相: 0, 延迟相: 0 }
         },
 
         surgery: {
@@ -156,6 +170,8 @@
           ...this.pathology
         }
         localStorage.removeItem(this.base.baseHospitalNum) //ios系统可能需要先移除之前的项
+        if (this.$route.query.id != this.base.baseHospitalNum)
+          localStorage.removeItem(this.$route.query.id)
         localStorage.setItem(this.base.baseHospitalNum, JSON.stringify(temp))
       },
 
@@ -223,6 +239,8 @@
         this.images.images_picture = arguments[13]
         this.images.images_yxkzd = arguments[14]
         this.images.images_yxwksqzd = arguments[15]
+
+        this.images.qx_image_num = arguments[16]
       },
       handleSaveSurgery() {
         this.surgery.surgery_ssfs = arguments[0]
@@ -246,7 +264,7 @@
         this.surgery.surgery_fjhecss = arguments[18]
         this.surgery.surgery_wsqsw = arguments[19]
         this.surgery.surgery_shzyts = arguments[20]
-        this.surgery.surgery_shylydfm[0] = arguments[21]
+        this.surgery.surgery_shylydfm = arguments[21]
       },
       handleSavePathology() {
         this.pathology.pathology_blzd = arguments[0]
@@ -266,7 +284,124 @@
         this.pathology.pathology_qtbz = arguments[14]
 
         // this.$options.methods.uploadToLocal.bind(this)()
+      },
+
+      handleUpload() {
+        if (
+          this.base.baseHospitalNum != '' &&
+          this.base.basePatientName != '' &&
+          this.base.basePatientGender != '' &&
+          this.base.basePatientAge != '' &&
+          this.pathology.pathology_blzd != ''
+        ) {
+          Dialog.confirm({
+            title: '是否上传？'
+          })
+            .then(() => {
+              console.log('上传')
+              this.$router.replace('/DataManage/UploadedItem')
+            })
+            .catch(() => {})
+        }
+      },
+
+      fetchData() {
+        if (this.$route.query.id != null) {
+          let id = this.$route.query.id
+          let temp = JSON.parse(localStorage.getItem(id))
+          this.base.baseHospitalNum = temp.baseHospitalNum
+          this.base.basePatientName = temp.basePatientName
+          this.base.basePatientAge = temp.basePatientAge
+          this.base.basePatientGender = temp.basePatientGender
+
+          this.analysis.analysis_WBC = temp.analysis_WBC
+          this.analysis.analysis_NEU = temp.analysis_NEU
+          this.analysis.analysis_LYM = temp.analysis_LYM
+          this.analysis.analysis_Hb = temp.analysis_Hb
+          this.analysis.analysis_PLT = temp.analysis_PLT
+          this.analysis.analysis_TBIL = temp.analysis_TBIL
+          this.analysis.analysis_ALB = temp.analysis_ALB
+          this.analysis.analysis_FBG = temp.analysis_FBG
+          this.analysis.analysis_HbA1c = temp.analysis_HbA1c
+          this.analysis.analysis_CRE = temp.analysis_CRE
+          this.analysis.analysis_CHOL = temp.analysis_CHOL
+          this.analysis.analysis_TG = temp.analysis_TG
+          this.analysis.analysis_AFP = temp.analysis_AFP
+          this.analysis.analysis_CEA = temp.analysis_CEA
+          this.analysis.analysis_CA199 = temp.analysis_CA199
+          this.analysis.analysis_CA125 = temp.analysis_CA125
+          this.analysis.analysis_CA724 = temp.analysis_CA724
+          this.analysis.analysis_IgG4 = temp.analysis_IgG4
+
+          this.images.images_zlsm = temp.images_zlsm
+          this.images.images_zdzj = temp.images_zdzj
+          this.images.images_nbjj = temp.images_nbjj
+          this.images.images_ddn = temp.images_ddn
+          this.images.images_nbqh = temp.images_nbqh
+          this.images.images_gh = temp.images_gh
+          this.images.images_sxcf = temp.images_sxcf
+          this.images.images_ydyxws = temp.images_ydyxws
+          this.images.images_ydygkz = temp.images_ydygkz
+          this.images.images_yxzwsc = temp.images_yxzwsc
+          this.images.images_yzygxt = temp.images_yzygxt
+          this.images.images_zygzj = temp.images_zygzj
+          this.images.images_ssqx = temp.images_ssqx
+          this.images.images_picture = temp.images_picture
+          this.images.images_yxkzd = temp.images_yxkzd
+          this.images.images_yxwksqzd = temp.images_yxwksqzd
+          this.images.qx_image_num = temp.qx_image_num
+
+          this.surgery.surgery_ssfs = temp.surgery_ssfs
+          this.surgery.surgery_ssfs_other = temp.surgery_ssfs_other
+          this.surgery.surgery_sstj = temp.surgery_sstj
+          this.surgery.surgery_ycwhfs = temp.surgery_ycwhfs
+          this.surgery.surgery_ycwhfs_other = temp.surgery_ycwhfs_other
+          this.surgery.surgery_yczd = temp.surgery_yczd
+          this.surgery.surgery_sssj = temp.surgery_sssj
+          this.surgery.surgery_szcx = temp.surgery_szcx
+          this.surgery.surgery_sxl = temp.surgery_sxl
+          this.surgery.surgery_mjmzh = temp.surgery_mjmzh
+          this.surgery.surgery_POPF = temp.surgery_POPF
+          this.surgery.surgery_DGE = temp.surgery_DGE
+          this.surgery.surgery_PPH = temp.surgery_PPH
+          this.surgery.surgery_dl = temp.surgery_dl
+          this.surgery.surgery_rml = temp.surgery_rml
+          this.surgery.surgery_fqgr = temp.surgery_fqgr
+          this.surgery.surgery_VTEorPE = temp.surgery_VTEorPE
+          this.surgery.surgery_yylccyl = temp.surgery_yylccyl
+          this.surgery.surgery_fjhecss = temp.surgery_fjhecss
+          this.surgery.surgery_wsqsw = temp.surgery_wsqsw
+          this.surgery.surgery_shzyts = temp.surgery_shzyts
+          this.surgery.surgery_shylydfm = temp.surgery_shylydfm
+
+          this.pathology.pathology_blzd = temp.pathology_blzd
+          this.pathology.pathology_blzd_IPMN_1 = temp.pathology_blzd_IPMN_1
+          this.pathology.pathology_blzd_IPMN_2 = temp.pathology_blzd_IPMN_2
+          this.pathology.pathology_blzd_other = temp.pathology_blzd_other
+          this.pathology.pathology_zdzj = temp.pathology_zdzj
+          this.pathology.pathology_yxcd = temp.pathology_yxcd
+          this.pathology.pathology_qyzdysyx = temp.pathology_qyzdysyx
+          this.pathology.pathology_mgqf = temp.pathology_mgqf
+          this.pathology.pathology_yzzfjr = temp.pathology_yzzfjr
+          this.pathology.pathology_dxgqf = temp.pathology_dxgqf
+          this.pathology.pathology_zlbjs = temp.pathology_zlbjs
+          this.pathology.pathology_yxlbjs = temp.pathology_yxlbjs
+          this.pathology.pathology_qtzqzy = temp.pathology_qtzqzy
+          this.pathology.pathology_Ki67 = temp.pathology_Ki67
+          this.pathology.pathology_qtbz = temp.pathology_qtbz
+          // console.log(
+          //   this.base,
+          //   this.analysis,
+          //   this.images,
+          //   this.surgery,
+          //   this.pathology
+          // )
+        }
       }
+    },
+
+    created() {
+      this.fetchData()
     }
   }
 </script>

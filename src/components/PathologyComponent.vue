@@ -418,7 +418,7 @@
         ]
       }
     },
-    props: { id: String },
+    props: { id: String, pathology: Object },
     methods: {
       onFinish({ selectedOptions }) {
         this.show = false
@@ -426,6 +426,11 @@
         this.show_other = selectedOptions[0].value === '700' ? true : false
         this.show_IPMN_1 = selectedOptions[0].value === '300' ? true : false
         this.show_IPMN_2 = this.show_IPMN_1
+        if (this.show_IPMN_1 === false) {
+          //如果不显示分型，分型之前输入的值清空
+          this.fieldValue_IPMN_1 = ''
+          this.fieldValue_IPMN_2 = ''
+        }
       },
       onFinish_IPMN_1({ selectedOptions }) {
         this.show_IPMN_1_cascader = false
@@ -479,7 +484,30 @@
             background: '#ffe1e1'
           })
       },
-      uploadBtn() {}
+      uploadBtn() {
+        this.$emit('uploadItem')
+      }
+    },
+    created() {
+      if (this.pathology.pathology_blzd === '胰腺导管内乳头状粘液性瘤（IPMN）') {
+        this.show_IPMN_1 = true
+        this.show_IPMN_2 = true
+      } else if (this.pathology.pathology_blzd === '其他') this.show_other = true
+      this.fieldValue = this.pathology.pathology_blzd
+      this.fieldValue_IPMN_1 = this.pathology.pathology_blzd_IPMN_1
+      this.fieldValue_IPMN_2 = this.pathology.pathology_blzd_IPMN_2
+      this.value_cascader = this.pathology.pathology_blzd_other
+      this.value1 = this.pathology.pathology_zdzj
+      this.fieldValue1 = this.pathology.pathology_yxcd
+      this.fieldValue2 = this.pathology.pathology_qyzdysyx
+      this.fieldValue3 = this.pathology.pathology_mgqf
+      this.fieldValue4 = this.pathology.pathology_yzzfjr
+      this.fieldValue5 = this.pathology.pathology_dxgqf
+      this.value2 = this.pathology.pathology_zlbjs
+      this.value3 = this.pathology.pathology_yxlbjs
+      this.fieldValue6 = this.pathology.pathology_qtzqzy
+      this.value4 = this.pathology.pathology_Ki67
+      this.value5 = this.pathology.pathology_qtbz
     },
     updated() {
       this.$emit(

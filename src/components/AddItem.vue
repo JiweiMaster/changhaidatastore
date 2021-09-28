@@ -16,7 +16,6 @@
     name: 'AddItem',
     methods: {
       newData() {
-        console.log('new 一个新的病例数据' + this.href)
         this.$router.push('/BaseInfo')
       }
     }

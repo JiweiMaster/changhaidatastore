@@ -182,7 +182,7 @@
         }
       }
     },
-    props: { id: String },
+    props: { id: String, analysis_prop: Object },
     methods: {
       cancelBtn() {
         this.$router.back()
@@ -199,7 +199,29 @@
             background: '#ffe1e1'
           })
       },
-      uploadBtn() {}
+      uploadBtn() {
+        this.$emit('uploadItem')
+      }
+    },
+    created() {
+      this.analysis.value01 = this.analysis_prop.analysis_WBC
+      this.analysis.value02 = this.analysis_prop.analysis_NEU
+      this.analysis.value03 = this.analysis_prop.analysis_LYM
+      this.analysis.value04 = this.analysis_prop.analysis_Hb
+      this.analysis.value05 = this.analysis_prop.analysis_PLT
+      this.analysis.value06 = this.analysis_prop.analysis_TBIL
+      this.analysis.value07 = this.analysis_prop.analysis_ALB
+      this.analysis.value08 = this.analysis_prop.analysis_FBG
+      this.analysis.value09 = this.analysis_prop.analysis_HbA1c
+      this.analysis.value10 = this.analysis_prop.analysis_CRE
+      this.analysis.value11 = this.analysis_prop.analysis_CHOL
+      this.analysis.value12 = this.analysis_prop.analysis_TG
+      this.analysis.value13 = this.analysis_prop.analysis_AFP
+      this.analysis.value14 = this.analysis_prop.analysis_CEA
+      this.analysis.value15 = this.analysis_prop.analysis_CA199
+      this.analysis.value16 = this.analysis_prop.analysis_CA125
+      this.analysis.value17 = this.analysis_prop.analysis_CA724
+      this.analysis.value18 = this.analysis_prop.analysis_IgG4
     },
     updated() {
       this.$emit('saveAnalysis', this.analysis)
