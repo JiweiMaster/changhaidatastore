@@ -716,6 +716,10 @@
       this.fieldValue15 = this.surgery.surgery_wsqsw
       this.value4 = this.surgery.surgery_shzyts
       this.value5 = this.surgery.surgery_shylydfm
+      //展示所有淀粉酶记录
+      while (this.day < this.value5.length) {
+        this.days.push('术后引流液淀粉酶（第' + ++this.day + '天）')
+      }
     },
     updated() {
       this.$emit(

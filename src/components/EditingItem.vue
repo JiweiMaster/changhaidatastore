@@ -14,19 +14,23 @@
         <p class="id">住院号：{{ item.baseHospitalNum }}</p>
         <p>
           基本信息：{{ item.basePatientName }}，{{
-            item.basePatientGender == '1' ? '男' : '女'
+            item.basePatientGender == '1'
+              ? '男'
+              : item.basePatientGender == '2'
+              ? '女'
+              : ''
           }}，{{ item.basePatientAge }}
         </p>
         <p>病理信息：{{ item.pathology_blzd }}</p>
       </div>
       <div>
-        <van-button class="btn" type="info" size="small" @click="editItem(item)"
+        <van-button class="btn" type="info" size="mini" @click="editItem(item)"
           >编辑</van-button
         >
         <van-button
           class="btn"
           type="info"
-          size="small"
+          size="mini"
           @click="uploadItem(item)"
           >上传</van-button
         >

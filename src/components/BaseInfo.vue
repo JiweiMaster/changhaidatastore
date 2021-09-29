@@ -298,11 +298,15 @@
             title: '是否上传？'
           })
             .then(() => {
-              console.log('上传')
+              console.log('上传') //可先调用handleSave把数据放在localstorage中
+              localStorage.removeItem(this.base.baseHospitalNum)
               this.$router.replace('/DataManage/UploadedItem')
             })
             .catch(() => {})
-        }
+        } else
+          Dialog.alert({
+            message: '基本信息或病理信息不完整，请完善信息!'
+          }).then(() => {})
       },
 
       fetchData() {
