@@ -1,5 +1,12 @@
 <template>
-  <div style="margin-left: 10px; margin-right: 10px; margin-top: 30px">
+  <div
+    style="
+      margin-left: 10px;
+      margin-right: 10px;
+      margin-top: 30px;
+      font-size: 17px;
+    "
+  >
     <!--     住院号     -->
     <div style="margin-top: 15px">
       <div>住院号*:</div>
@@ -110,4 +117,7 @@
 </script>
 
 <style scoped>
+  .input_div {
+    width: 80vw;
+  }
 </style>

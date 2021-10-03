@@ -5,7 +5,7 @@
         <van-field
           v-model="zlsm"
           label="肿瘤数目
-        （个）"
+        (个)"
           placeholder="正整数"
           input-align="right"
         />
@@ -13,7 +13,7 @@
       <van-cell-group>
         <van-field
           v-model="zdzj"
-          label="最大直径（cm） "
+          label="最大直径(cm) "
           placeholder="保留1位小数"
           input-align="right"
         />
@@ -185,7 +185,7 @@
         <van-field
           v-model="zygzj"
           label="主胰管直径
-        （mm）"
+        (mm)"
           placeholder="保留1位小数"
           input-align="right"
         />
@@ -222,12 +222,15 @@
           :before-read="asyncBeforeRead"
           :after-read="afterRead"
           :before-delete="beforeDelete"
-          :max-count="4"
         >
           <template #preview-cover="{ file }">
-            <div class="preview-cover van-ellipsis">{{ file.name }}</div>
-          </template></van-uploader
-        >
+            <div class="preview-cover van-ellipsis">
+              {{
+                typeof file != 'undefined' ? file.name.slice(0, 5) : '已保存'
+              }}
+            </div>
+          </template>
+        </van-uploader>
       </div>
 
       <van-cell-group>
@@ -255,7 +258,14 @@
       </van-cell-group>
     </div>
     <!--          提交的按钮-->
-    <div style="display: flex; justify-content: center; margin-top: 50px">
+    <div
+      style="
+        display: flex;
+        justify-content: center;
+        margin-top: 50px;
+        margin-bottom: 5vh;
+      "
+    >
       <van-button round type="info" style="width: 80px" v-on:click="cancelBtn"
         >取消</van-button
       >
@@ -276,6 +286,9 @@
 
 <script>
   import { Notify } from 'vant'
+  import axios from 'axios'
+
+  const imageUploadUrl = 'http://localhost:8080/uploadImg/'
 
   export default {
     name: 'ImageComponent.vue',
@@ -395,10 +408,8 @@
           { text: '延迟相', value: '400' }
         ],
 
-        fileList: [
-          { url: 'https://img01.yzcdn.cn/vant/leaf.jpg' },
-          { url: 'https://img01.yzcdn.cn/vant/leaf.jpg' }
-        ],
+        fileList: [],
+        image_upload_list: [], //存储上传图片的URL
 
         qx_image_num: { 平扫相: 0, 动脉相: 0, 门静脉相: 0, 延迟相: 0 } //记录当前期相图像上传了几个
       }
@@ -461,9 +472,13 @@
           } else {
             let img = new File(
               [file],
-              this.fieldValue10 + '-' + ++this.qx_image_num[this.fieldValue10],
+              this.fieldValue10 +
+                '-' +
+                ++this.qx_image_num[this.fieldValue10] +
+                '.' +
+                file.type.slice(6),
               {
-                type: 'image/jpeg'
+                type: file.type
               }
             )
             resolve(img)
@@ -473,16 +488,50 @@
 
       afterRead(file) {
         // 此时可以自行将文件上传至服务器
-        console.log(this.fileList)
-        console.log(file.file.name)
-        // this.read_images[this.cascaderValue10] = file.content
-        //console.log(this.read_images)
+        let image = new FormData()
+        image.append('file', file.file)
+
+        axios
+          .post(imageUploadUrl, image, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          })
+          .then(
+            (response) => {
+              console.log('上传结果', response.data)
+              this.image_upload_list.push({
+                name: file.file.name,
+                url: response.data.url
+              })
+              //console.log(this.fileList)
+              //console.log(this.image_upload_list)
+            },
+            (error) => {
+              console.log('上传失败', error.message)
+            }
+          )
       },
 
-      beforeDelete() {
+      beforeDelete(file) {
         //修改当前期相的上传图片数量
-        if (this.qx_image_num[this.fieldValue10] > 0)
-          this.qx_image_num[this.fieldValue10]--
+        //console.log(file.file)
+        if (typeof file.file != 'undefined') {
+          if (this.qx_image_num[file.file.name.slice(0, 3)] > 0)
+            this.qx_image_num[file.file.name.slice(0, 3)]--
+        } else {
+          if (this.qx_image_num[file.name.slice(0, 3)] > 0)
+            this.qx_image_num[file.name.slice(0, 3)]--
+        }
+
+        this.image_upload_list.forEach(function (item, index, arr) {
+          if (
+            item.name ===
+            (typeof file.file != 'undefined' ? file.file.name : file.name)
+          ) {
+            arr.splice(index, 1)
+          }
+        })
         return true
       },
 
@@ -520,6 +569,7 @@
       this.zygzj = this.images.images_zygzj
       this.fieldValue10 = this.images.images_ssqx
       this.fileList = this.images.images_picture
+      this.image_upload_list = this.images.images_picture
       this.message1 = this.images.images_yxkzd
       this.message2 = this.images.images_yxwksqzd
 
@@ -541,7 +591,8 @@
         this.fieldValue09,
         this.zygzj,
         this.fieldValue10,
-        this.fileList,
+        //this.fileList,  换成简略的文件列表
+        this.image_upload_list,
         this.message1,
         this.message2,
 

@@ -88,7 +88,7 @@
       <van-cell-group>
         <van-field
           v-model="value1"
-          label="手术时间（min）"
+          label="手术时间(min)"
           placeholder="大于0的正整数"
         />
       </van-cell-group>
@@ -96,7 +96,7 @@
       <van-cell-group>
         <van-field
           v-model="value2"
-          label="术中出血（ml）"
+          label="术中出血(ml)"
           placeholder="大于等于0的正整数"
         />
       </van-cell-group>
@@ -104,7 +104,7 @@
       <van-cell-group>
         <van-field
           v-model="value3"
-          label="输血量（ml）"
+          label="输血量(ml)"
           placeholder="大于等于0的正整数"
         />
       </van-cell-group>
@@ -132,7 +132,7 @@
           v-model="fieldValue06"
           is-link
           readonly
-          label="术后胰瘘（POPF）"
+          label="术后胰瘘(POPF)"
           @click="show06 = true"
         />
         <van-popup v-model="show06" position="bottom">
@@ -150,7 +150,7 @@
           v-model="fieldValue07"
           is-link
           readonly
-          label="胃排空延迟（DGE）"
+          label="胃排空延迟(DGE)"
           @click="show07 = true"
         />
         <van-popup v-model="show07" position="bottom">
@@ -168,7 +168,7 @@
           v-model="fieldValue08"
           is-link
           readonly
-          label="手术后出血（PPH）"
+          label="手术后出血(PPH)"
           @click="show08 = true"
         />
         <van-popup v-model="show08" position="bottom">
@@ -310,7 +310,7 @@
       <van-cell-group>
         <van-field
           v-model="value4"
-          label="术后住院天数（天）"
+          label="术后住院天数(天)"
           placeholder="大于等于0的正整数"
         />
       </van-cell-group>
@@ -318,7 +318,7 @@
       <van-cell-group>
         <van-field
           v-model="value5[0]"
-          label="术后引流液淀粉酶（第1天）"
+          label="术后引流液淀粉酶(第1天)"
           placeholder="选择每日中最高的引流液淀粉酶填写"
           center
         >
@@ -410,7 +410,7 @@
             value: '400'
           },
           {
-            text: '次全胰切除术（PPTP-SP）',
+            text: '次全胰切除术(PPTP-SP)',
             value: '500'
           },
           {
@@ -593,7 +593,7 @@
           { text: '有', value: '200' }
         ],
 
-        days: [], //术后引流淀粉酶（天数）
+        days: [], //术后引流淀粉酶(天数)
         day: 1 //供for使用
       }
     },
@@ -603,7 +603,10 @@
         this.show01 = false
         this.fieldValue01 = selectedOptions.map((option) => option.text).join('/')
         if (selectedOptions[0].value === '700') this.show_other1 = true
-        else this.show_other1 = false
+        else {
+          this.show_other1 = false
+          this.value_cascader1 = ''
+        }
       },
       onFinish02({ selectedOptions }) {
         this.show02 = false
@@ -613,7 +616,10 @@
         this.show03 = false
         this.fieldValue03 = selectedOptions.map((option) => option.text).join('/')
         if (selectedOptions[2].value === '113') this.show_other2 = true
-        else this.show_other2 = false
+        else {
+          this.show_other2 = false
+          this.value_cascader2 = ''
+        }
       },
       onFinish04({ selectedOptions }) {
         this.show04 = false
@@ -667,7 +673,7 @@
         if (this.day >= 7) {
           return
         } else {
-          this.days.push('术后引流液淀粉酶（第' + ++this.day + '天）')
+          this.days.push('术后引流液淀粉酶(第' + ++this.day + '天)')
         }
       },
 
@@ -718,7 +724,7 @@
       this.value5 = this.surgery.surgery_shylydfm
       //展示所有淀粉酶记录
       while (this.day < this.value5.length) {
-        this.days.push('术后引流液淀粉酶（第' + ++this.day + '天）')
+        this.days.push('术后引流液淀粉酶(第' + ++this.day + '天)')
       }
     },
     updated() {

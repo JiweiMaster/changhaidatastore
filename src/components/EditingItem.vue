@@ -41,6 +41,10 @@
 
 <script>
   import { Dialog } from 'vant'
+  import axios from 'axios'
+
+  const uploadDataUrl = 'http://localhost:8080/upload_all_data/'
+
   export default {
     name: 'EditingItem',
     props: {
@@ -62,15 +66,38 @@
           item.basePatientName != '' &&
           item.basePatientGender != '' &&
           item.basePatientAge != '' &&
-          item.pathology_blzd != ''
+          ((item.pathology_blzd != '' &&
+            item.pathology_blzd != '其他' &&
+            item.pathology_blzd != '胰腺导管内乳头状粘液性瘤(IPMN)') ||
+            (item.pathology_blzd == '其他' && item.pathology_blzd_other != '') ||
+            (item.pathology_blzd == '胰腺导管内乳头状粘液性瘤(IPMN)' &&
+              item.pathology_blzd_IPMN_1 != '' &&
+              item.pathology_blzd_IPMN_2 != ''))
         ) {
           Dialog.confirm({
             title: '是否上传？'
           })
             .then(() => {
               console.log('上传' + item)
-              localStorage.removeItem(item.baseHospitalNum)
-              this.$router.push('/DataManage/UploadedItem')
+              let all_data = JSON.stringify(item)
+              let form_data = new FormData()
+              form_data.append('all_data', all_data)
+              axios
+                .post(uploadDataUrl, form_data, {
+                  headers: {
+                    'Content-Type': 'multipart/form-data'
+                  }
+                })
+                .then(
+                  (response) => {
+                    console.log('上传结果', response.data)
+                    localStorage.removeItem(item.baseHospitalNum)
+                    this.$router.push('/DataManage/UploadedItem')
+                  },
+                  (error) => {
+                    console.log('上传失败', error.message)
+                  }
+                )
             })
             .catch(() => {})
         } else
@@ -89,7 +116,7 @@
         if (temp.pathology_blzd_other != '')
           //如果是其他需要展示其他中输入的信息，不会影响localstorage中的存储
           temp.pathology_blzd = temp.pathology_blzd_other
-        if (temp.pathology_blzd == '胰腺导管内乳头状粘液性瘤（IPMN）')
+        if (temp.pathology_blzd == '胰腺导管内乳头状粘液性瘤(IPMN)')
           temp.pathology_blzd =
             temp.pathology_blzd +
             '[' +

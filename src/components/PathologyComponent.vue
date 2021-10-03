@@ -62,7 +62,7 @@
       <van-cell-group>
         <van-field
           v-model="value1"
-          label="最大直径（cm）"
+          label="最大直径(cm)"
           placeholder="限数字，可带小数点"
         />
       </van-cell-group>
@@ -160,7 +160,7 @@
       <van-cell-group>
         <van-field
           v-model="value2"
-          label="总淋巴结数（个）"
+          label="总淋巴结数(个)"
           placeholder="大于等于0的整数"
         />
       </van-cell-group>
@@ -168,7 +168,7 @@
       <van-cell-group>
         <van-field
           v-model="value3"
-          label="阳性淋巴结数（个）"
+          label="阳性淋巴结数(个)"
           placeholder="大于等于0的整数"
         />
       </van-cell-group>
@@ -241,7 +241,7 @@
         cascaderValue: '',
         options: [
           {
-            text: '胰腺浆液性腺瘤（SCN）',
+            text: '胰腺浆液性腺瘤(SCN)',
             value: '100',
             children: [
               { text: '寡囊腺瘤', value: '110' },
@@ -250,15 +250,15 @@
             ]
           },
           {
-            text: '胰腺粘液性囊腺瘤（MCN）',
+            text: '胰腺粘液性囊腺瘤(MCN)',
             value: '200'
           },
           {
-            text: '胰腺导管内乳头状粘液性瘤（IPMN）',
+            text: '胰腺导管内乳头状粘液性瘤(IPMN)',
             value: '300'
           },
           // {
-          //   text: '胰腺导管内乳头状粘液性瘤（IPMN）型态1',
+          //   text: '胰腺导管内乳头状粘液性瘤(IPMN)型态1',
           //   value: '300',
           //   children: [
           //     { text: '主胰管型', value: '310' },
@@ -267,7 +267,7 @@
           //   ]
           // },
           // {
-          //   text: '胰腺导管内乳头状粘液性瘤（IPMN）型态2',
+          //   text: '胰腺导管内乳头状粘液性瘤(IPMN)型态2',
           //   value: '400',
           //   children: [
           //     { text: '胃型', value: '410' },
@@ -278,11 +278,11 @@
           //   ]
           // },
           {
-            text: '胰腺实性假乳头状肿瘤（SPN）',
+            text: '胰腺实性假乳头状肿瘤(SPN)',
             value: '500'
           },
           {
-            text: '胰腺神经内分泌肿瘤（pNET））',
+            text: '胰腺神经内分泌肿瘤(pNET)',
             value: '600'
           },
           {
@@ -424,6 +424,7 @@
         this.show = false
         this.fieldValue = selectedOptions.map((option) => option.text).join('/')
         this.show_other = selectedOptions[0].value === '700' ? true : false
+        if (this.show_other == false) this.value_cascader = ''
         this.show_IPMN_1 = selectedOptions[0].value === '300' ? true : false
         this.show_IPMN_2 = this.show_IPMN_1
         if (this.show_IPMN_1 === false) {
@@ -489,7 +490,7 @@
       }
     },
     created() {
-      if (this.pathology.pathology_blzd === '胰腺导管内乳头状粘液性瘤（IPMN）') {
+      if (this.pathology.pathology_blzd === '胰腺导管内乳头状粘液性瘤(IPMN)') {
         this.show_IPMN_1 = true
         this.show_IPMN_2 = true
       } else if (this.pathology.pathology_blzd === '其他') this.show_other = true

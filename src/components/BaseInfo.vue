@@ -47,6 +47,9 @@
 
 <script>
   import { Dialog } from 'vant'
+  import axios from 'axios'
+
+  const uploadDataUrl = 'http://localhost:8080/upload_all_data/'
 
   import BaseComponent from './BaseComponent'
   import AnalysisComponent from './AnalysisComponent'
@@ -292,15 +295,40 @@
           this.base.basePatientName != '' &&
           this.base.basePatientGender != '' &&
           this.base.basePatientAge != '' &&
-          this.pathology.pathology_blzd != ''
+          ((this.pathology.pathology_blzd != '' &&
+            this.pathology.pathology_blzd != '其他' &&
+            this.pathology.pathology_blzd != '胰腺导管内乳头状粘液性瘤(IPMN)') ||
+            (this.pathology.pathology_blzd == '其他' &&
+              this.pathology.pathology_blzd_other != '') ||
+            (this.pathology.pathology_blzd == '胰腺导管内乳头状粘液性瘤(IPMN)' &&
+              this.pathology.pathology_blzd_IPMN_1 != '' &&
+              this.pathology.pathology_blzd_IPMN_2 != ''))
         ) {
           Dialog.confirm({
             title: '是否上传？'
           })
             .then(() => {
-              console.log('上传') //可先调用handleSave把数据放在localstorage中
-              localStorage.removeItem(this.base.baseHospitalNum)
-              this.$router.replace('/DataManage/UploadedItem')
+              console.log('上传') //先调用handleSave把数据放在localstorage中
+              this.handleSave()
+              let all_data = localStorage.getItem(this.base.baseHospitalNum)
+              let form_data = new FormData()
+              form_data.append('all_data', all_data)
+              axios
+                .post(uploadDataUrl, form_data, {
+                  headers: {
+                    'Content-Type': 'multipart/form-data'
+                  }
+                })
+                .then(
+                  (response) => {
+                    console.log('上传结果', response.data)
+                    localStorage.removeItem(this.base.baseHospitalNum)
+                    this.$router.replace('/DataManage/UploadedItem')
+                  },
+                  (error) => {
+                    console.log('上传失败', error.message)
+                  }
+                )
             })
             .catch(() => {})
         } else
@@ -393,13 +421,6 @@
           this.pathology.pathology_qtzqzy = temp.pathology_qtzqzy
           this.pathology.pathology_Ki67 = temp.pathology_Ki67
           this.pathology.pathology_qtbz = temp.pathology_qtbz
-          // console.log(
-          //   this.base,
-          //   this.analysis,
-          //   this.images,
-          //   this.surgery,
-          //   this.pathology
-          // )
         }
       }
     },
