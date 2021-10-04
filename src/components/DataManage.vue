@@ -16,11 +16,26 @@
 </template>
 
 <script>
+import AddItem from "./AddItem";
+import EditingItem from "./EditingItem";
+import UploadedItem from "./UploadedItem";
   export default {
     name: 'DataManage',
+    comments:{
+      AddItem,EditingItem,UploadedItem
+    },
     methods: {
       returnLastPage() {
         this.$router.push('/')
+      },
+      NewCreate(){
+
+      },
+      Editing(){
+
+      },
+      Uploading(){
+
       }
     }
   }

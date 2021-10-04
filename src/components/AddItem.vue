@@ -1,5 +1,5 @@
 <template>
-  <div style="margin-top: 75vh; margin-left: 70vw">
+  <div style="margin-left: 70vw; margin-top: 74vh">
     <van-button
       round
       type="info"
