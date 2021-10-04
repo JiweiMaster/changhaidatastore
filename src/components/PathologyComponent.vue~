@@ -9,7 +9,6 @@
           label="病理诊断*"
           placeholder="必填"
           @click="show = true"
-          input-align="right"
         />
         <van-popup v-model="show" position="bottom">
           <van-cascader
@@ -27,7 +26,6 @@
           readonly
           label="IPMN型态1"
           @click="show_IPMN_1_cascader = true"
-          input-align="right"
         />
         <van-popup v-model="show_IPMN_1_cascader" position="bottom">
           <van-cascader
@@ -44,7 +42,6 @@
           readonly
           label="IPMN型态2"
           @click="show_IPMN_2_cascader = true"
-          input-align="right"
         />
         <van-popup v-model="show_IPMN_2_cascader" position="bottom">
           <van-cascader
@@ -59,7 +56,6 @@
           v-if="this.show_other === true"
           v-model="value_cascader"
           label="其他"
-          input-align="right"
         ></van-field>
       </van-cell-group>
 
@@ -68,7 +64,6 @@
           v-model="value1"
           label="最大直径(cm)"
           placeholder="限数字，可带小数点"
-          input-align="right"
         />
       </van-cell-group>
 
@@ -79,7 +74,6 @@
           readonly
           label="异型程度"
           @click="show1 = true"
-          input-align="right"
         />
         <van-popup v-model="show1" position="bottom">
           <van-cascader
@@ -98,7 +92,6 @@
           readonly
           label="切缘中度以上异型"
           @click="show2 = true"
-          input-align="right"
         />
         <van-popup v-model="show2" position="bottom">
           <van-cascader
@@ -117,7 +110,6 @@
           readonly
           label="脉管侵犯"
           @click="show3 = true"
-          input-align="right"
         />
         <van-popup v-model="show3" position="bottom">
           <van-cascader
@@ -136,7 +128,6 @@
           readonly
           label="胰周脂肪浸润"
           @click="show4 = true"
-          input-align="right"
         />
         <van-popup v-model="show4" position="bottom">
           <van-cascader
@@ -155,7 +146,6 @@
           readonly
           label="大血管侵犯"
           @click="show5 = true"
-          input-align="right"
         />
         <van-popup v-model="show5" position="bottom">
           <van-cascader
@@ -172,7 +162,6 @@
           v-model="value2"
           label="总淋巴结数(个)"
           placeholder="大于等于0的整数"
-          input-align="right"
         />
       </van-cell-group>
 
@@ -181,7 +170,6 @@
           v-model="value3"
           label="阳性淋巴结数(个)"
           placeholder="大于等于0的整数"
-          input-align="right"
         />
       </van-cell-group>
 
@@ -192,7 +180,6 @@
           readonly
           label="其他脏器转移"
           @click="show6 = true"
-          input-align="right"
         />
         <van-popup v-model="show6" position="bottom">
           <van-cascader
@@ -209,12 +196,11 @@
           v-model="value4"
           label="Ki-67(%)"
           placeholder="大于等于0的整数"
-          input-align="right"
         />
       </van-cell-group>
 
       <van-cell-group>
-        <van-field v-model="value5" label="其他备注" input-align="right" />
+        <van-field v-model="value5" label="其他备注" />
       </van-cell-group>
     </div>
     <!--          提交的按钮-->

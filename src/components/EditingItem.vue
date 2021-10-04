@@ -8,9 +8,8 @@
         border-bottom: 1px solid rgba(0, 0, 0, 0.1);
       "
       v-for="(item, index) in patientInfo"
-      :key="index"
-    >
-      <div style="float: left">
+      :key="index">
+      <div style="float: left; width: 60vw">
         <p class="id">住院号：{{ item.baseHospitalNum }}</p>
         <p>
           基本信息：{{ item.basePatientName }}，{{
@@ -44,6 +43,7 @@
   import axios from 'axios'
 
   const uploadDataUrl = 'http://localhost:8080/upload_all_data/'
+  // const uploadDataUrl = 'http://duolingo.cmitnb.top:8003/upload_all_data/'
 
   export default {
     name: 'EditingItem',
@@ -132,13 +132,21 @@
 
 <style scoped>
   p {
-    font-size: 0.5em;
+    font-size: 14px;
+    padding: 0px;
+    margin: 3px;
   }
   .id {
-    font-size: 0.7em;
-    font-weight: bold;
+    font-size: 14px;
+    font-weight: 550;
   }
   .btn {
     margin: 2vw;
+  }
+  .van-button--info{
+    padding: 5px;
+    background-color: #913935;
+    border: #913935;
+    border-radius: 5px;
   }
 </style>

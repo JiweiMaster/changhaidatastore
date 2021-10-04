@@ -288,7 +288,8 @@
   import { Notify } from 'vant'
   import axios from 'axios'
 
-  const imageUploadUrl = 'http://localhost:8080/uploadImg/'
+  // const imageUploadUrl = 'http://localhost:8080/uploadImg/'
+  const imageUploadUrl = 'http://duolingo.cmitnb.top:8003/uploadImg/'
 
   export default {
     name: 'ImageComponent.vue',
@@ -595,23 +596,32 @@
         this.image_upload_list,
         this.message1,
         this.message2,
-
         this.qx_image_num //各期相图像数
       )
     }
   }
 </script>
 
-<style>
+<style scoped>
   .preview-cover {
-    position: absolute;
-    bottom: 0;
-    box-sizing: border-box;
-    width: 100%;
-    padding: 4px;
-    color: #fff;
-    font-size: 12px;
-    text-align: center;
-    background: rgba(0, 0, 0, 0.3);
+    position: absolute !important;
+    bottom: 0 !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+    padding: 4px !important;
+    color: #fff !important;
+    font-size: 12px !important;
+    text-align: center !important;
+    background: rgba(0, 0, 0, 0.3) !important;
   }
+  .van-button--round {
+    border-radius: 10px !important;
+    background: #913935;
+    border: #913935;
+  }
+
+  .van-button {
+    height: 44px !important;
+  }
+
 </style>

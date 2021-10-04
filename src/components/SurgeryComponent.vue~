@@ -8,7 +8,6 @@
           readonly
           label="手术方式"
           @click="show01 = true"
-          input-align="right"
         />
         <van-popup v-model="show01" position="bottom">
           <van-cascader
@@ -23,7 +22,6 @@
           v-if="this.show_other1 === true"
           v-model="value_cascader1"
           label="其他手术方式"
-          input-align="right"
         ></van-field>
       </van-cell-group>
 
@@ -34,7 +32,6 @@
           readonly
           label="手术途径"
           @click="show02 = true"
-          input-align="right"
         />
         <van-popup v-model="show02" position="bottom">
           <van-cascader
@@ -53,7 +50,6 @@
           readonly
           label="胰肠吻合方式"
           @click="show03 = true"
-          input-align="right"
         />
         <van-popup v-model="show03" position="bottom">
           <van-cascader
@@ -68,7 +64,6 @@
           v-if="this.show_other2 === true"
           v-model="value_cascader2"
           label="其他吻合方式"
-          input-align="right"
         ></van-field>
       </van-cell-group>
 
@@ -79,7 +74,6 @@
           readonly
           label="胰腺质地"
           @click="show04 = true"
-          input-align="right"
         />
         <van-popup v-model="show04" position="bottom">
           <van-cascader
@@ -96,7 +90,6 @@
           v-model="value1"
           label="手术时间(min)"
           placeholder="大于0的正整数"
-          input-align="right"
         />
       </van-cell-group>
 
@@ -105,7 +98,6 @@
           v-model="value2"
           label="术中出血(ml)"
           placeholder="大于等于0的正整数"
-          input-align="right"
         />
       </van-cell-group>
 
@@ -114,7 +106,6 @@
           v-model="value3"
           label="输血量(ml)"
           placeholder="大于等于0的正整数"
-          input-align="right"
         />
       </van-cell-group>
 
@@ -125,7 +116,6 @@
           readonly
           label="门静脉置换"
           @click="show05 = true"
-          input-align="right"
         />
         <van-popup v-model="show05" position="bottom">
           <van-cascader
@@ -144,7 +134,6 @@
           readonly
           label="术后胰瘘(POPF)"
           @click="show06 = true"
-          input-align="right"
         />
         <van-popup v-model="show06" position="bottom">
           <van-cascader
@@ -163,7 +152,6 @@
           readonly
           label="胃排空延迟(DGE)"
           @click="show07 = true"
-          input-align="right"
         />
         <van-popup v-model="show07" position="bottom">
           <van-cascader
@@ -182,7 +170,6 @@
           readonly
           label="手术后出血(PPH)"
           @click="show08 = true"
-          input-align="right"
         />
         <van-popup v-model="show08" position="bottom">
           <van-cascader
@@ -201,7 +188,6 @@
           readonly
           label="胆瘘"
           @click="show09 = true"
-          input-align="right"
         />
         <van-popup v-model="show09" position="bottom">
           <van-cascader
@@ -274,7 +260,6 @@
           readonly
           label="因胰瘘穿刺引流"
           @click="show13 = true"
-          input-align="right"
         />
         <van-popup v-model="show13" position="bottom">
           <van-cascader
@@ -293,7 +278,6 @@
           readonly
           label="非计划二次手术"
           @click="show14 = true"
-          input-align="right"
         />
         <van-popup v-model="show14" position="bottom">
           <van-cascader
@@ -312,7 +296,6 @@
           readonly
           label="围术期死亡"
           @click="show15 = true"
-          input-align="right"
         />
         <van-popup v-model="show15" position="bottom">
           <van-cascader
@@ -329,7 +312,6 @@
           v-model="value4"
           label="术后住院天数(天)"
           placeholder="大于等于0的正整数"
-          input-align="right"
         />
       </van-cell-group>
 
@@ -339,7 +321,6 @@
           label="术后引流液淀粉酶(第1天)"
           placeholder="选择每日中最高的引流液淀粉酶填写"
           center
-          input-align="right"
         >
           <template v-slot:button>
             <van-button
@@ -357,7 +338,6 @@
           :key="index"
           :label="item"
           v-model="value5[index + 1]"
-          input-align="right"
         ></van-field>
       </van-cell-group>
     </div>

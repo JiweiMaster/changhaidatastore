@@ -1,6 +1,6 @@
 <template>
   <div class="home-page">
-    <h1>胰腺病例录入系统</h1>
+    <h1 style="color: #913935; background: white">胰腺病例录入系统</h1>
     <van-button
       class="btn"
       type="info"
@@ -37,6 +37,7 @@
     margin: 5vh auto;
     background-color: #913935 !important;
     border: 1px solid #913935 !important;
+    border-radius: 10px;
   }
   img {
     margin-top: 45vh;

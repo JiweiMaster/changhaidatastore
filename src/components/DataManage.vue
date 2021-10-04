@@ -6,17 +6,11 @@
       left-arrow
       @click-left="returnLastPage()"
     />
-    <router-view />
+    <router-view/>
     <van-tabbar route>
-      <van-tabbar-item to="/DataManage/AddItem" icon="add-o"
-        >新建</van-tabbar-item
-      >
-      <van-tabbar-item to="/DataManage/EditingItem" icon="todo-list-o"
-        >编辑中</van-tabbar-item
-      >
-      <van-tabbar-item to="/DataManage/UploadedItem" icon="passed"
-        >已上传</van-tabbar-item
-      >
+      <van-tabbar-item to="/DataManage/AddItem" icon="add-o">新建</van-tabbar-item>
+      <van-tabbar-item to="/DataManage/EditingItem" icon="todo-list-o">编辑中</van-tabbar-item>
+      <van-tabbar-item to="/DataManage/UploadedItem" icon="passed">已上传</van-tabbar-item>
     </van-tabbar>
   </div>
 </template>
@@ -49,6 +43,12 @@
   .van-tabbar-item--active {
     color: #913935 !important;
   }
+  .van-field__label{
+    width: 15em;
+  }
+  span{
+    font-size: 15px;
+  }
   h3 {
     margin: 40px 0 0;
   }
@@ -63,4 +63,5 @@
   a {
     color: #42b983;
   }
+
 </style>

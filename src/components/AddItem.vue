@@ -1,11 +1,12 @@
 <template>
-  <div style="margin-top: 60vh; margin-left: 70vw">
+  <div style="margin-top: 75vh; margin-left: 70vw">
     <van-button
       round
       type="info"
       width="3rem"
       height="3rem"
       icon="edit"
+      style=" border-radius:99px"
       v-on:click="newData()"
     ></van-button>
   </div>
@@ -22,13 +23,13 @@
   }
 </script>
 
-<style>
+<style scoped>
   .van-button {
     padding: 0 13px !important;
     font-size: 14px !important;
   }
-  .van-button--round {
-    border-radius: 99px !important;
+  .div.van-button--round {
+    border-radius: 30px !important;
   }
   .van-button--info {
     background-color: #913935 !important;

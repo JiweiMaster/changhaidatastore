@@ -117,7 +117,7 @@
 
 <style scoped>
   .input_div {
-    width: 91vw;
+    width: 92vw;
   }
   .van-button--round {
     border-radius: 10px !important;

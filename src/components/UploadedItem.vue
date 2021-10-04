@@ -20,19 +20,25 @@
         <p>病理信息：{{ item[4] }}</p>
       </div>
     </div>
+    <div style="margin-top: 100px">
+      <van-loading size="24px" vertical v-if="isShowLoading">加载中...</van-loading>
+    </div>
   </div>
 </template>
 
 <script>
   import axios from 'axios'
 
-  const getDataUrl = 'http://localhost:8080/query_patient_info/'
+  // const getDataUrl = 'http://localhost:8080/query_patient_info/'
+  const getDataUrl = 'http://duolingo.cmitnb.top:8003/query_patient_info/'
+
 
   export default {
     name: 'UploadedItem',
     data() {
       return {
-        briefPatientInfo: []
+        briefPatientInfo: [],
+        isShowLoading:true
       }
     },
     created() {
@@ -40,6 +46,7 @@
       axios.get(getDataUrl).then(
         (response) => {
           console.log('获取结果', response.data.ret)
+          this.isShowLoading = false
           if (response.data.ret.length != 'undefined') {
             for (let i = 0; i < response.data.ret.length; i++) {
               let temp = response.data.ret[i]
@@ -60,11 +67,13 @@
 
 <style scoped>
   p {
-    font-size: 0.5em;
+    font-size: 14px;
+    padding: 0px;
+    margin: 4px;
   }
   .id {
-    font-size: 0.7em;
-    font-weight: bold;
+    font-size: 14px;
+    font-weight: 550;
   }
   .btn {
     margin: 3vw;
