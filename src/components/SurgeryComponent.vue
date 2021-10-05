@@ -101,7 +101,7 @@
           label="手术时间(min)"
           placeholder="大于0的正整数"
           input-align="right"
-          @input="value1 = value1.replace(/[^0-9]/g, '').replace('0', '')"
+          @input="value1 = value1.replace(/[^0-9]/g, '').replace(/^0$/g, '')"
         />
       </van-cell-group>
 
@@ -111,7 +111,7 @@
           label="术中出血(ml)"
           placeholder="大于等于0的正整数"
           input-align="right"
-          @input="value2 = value2.replace(/[^0-9]/g, '').replace('0', '')"
+          @input="value2 = value2.replace(/[^0-9]/g, '').replace(/^0$/g, '')"
         />
       </van-cell-group>
 
@@ -121,7 +121,7 @@
           label="输血量(ml)"
           placeholder="大于等于0的正整数"
           input-align="right"
-          @input="value3 = value3.replace(/[^0-9]/g, '').replace('0', '')"
+          @input="value3 = value3.replace(/[^0-9]/g, '').replace(/^0$/g, '')"
         />
       </van-cell-group>
 
@@ -351,7 +351,7 @@
           label="术后住院天数(天)"
           placeholder="大于等于0的正整数"
           input-align="right"
-          @input="value4 = value4.replace(/[^0-9]/g, '').replace('0', '')"
+          @input="value4 = value4.replace(/[^0-9]/g, '').replace(/^0$/g, '')"
         />
       </van-cell-group>
 

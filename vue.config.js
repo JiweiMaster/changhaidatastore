@@ -12,16 +12,4 @@ module.exports = {
       }
     }
   }
-
-    // devServer: {
-    //     proxyTable: {
-    //         '/api':{            //这里的key就是axios的baseURL
-    //             target: 'http://duolingo.cmitnb.top',    //访问域名
-    //             changeOrigin: true,            //开启跨域
-    //             pathRewrite:{  // 路径重写，
-    //                 '^/api': 'api/index.php'  // 替换target中的请求地址
-    //             }
-    //         }
-    //     }
-    // }
 }

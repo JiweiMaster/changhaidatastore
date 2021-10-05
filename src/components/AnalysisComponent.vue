@@ -7,7 +7,7 @@
           label="白细胞计数 (WBC) [*10^9/L]"
           placeholder="实数，保留2位小数"
           input-align="right"
-          @input="analysis.value01 = analysis.value01.replace( /(?<=[0-9]*\.[0-9]{2})([0-9]*)/g,'')"
+          @input="analysis.value01 = analysis.value01.replace( /(?<=[0-9]*\.[0-9]{2})([0-9]*)/g,'').replace(/[^0-9\.]/g,'')"
         />
       </van-cell-group>
       <van-cell-group>
@@ -16,7 +16,7 @@
           label="中性粒细胞百分比 (NEU%) [%] "
           placeholder="实数，保留1位小数"
           input-align="right"
-          @input="analysis.value02 = analysis.value02.replace( /(?<=[0-9]*\.[0-9]{1})([0-9]*)/g,'')"
+          @input="analysis.value02 = analysis.value02.replace( /(?<=[0-9]*\.[0-9]{1})([0-9]*)/g,'').replace(/[^0-9\.]/g,'')"
         />
       </van-cell-group>
       <van-cell-group>
@@ -25,7 +25,7 @@
           label="淋巴细胞百分比 (LYM%) [%] "
           placeholder="实数，保留1位小数"
           input-align="right"
-          @input="analysis.value03 = analysis.value03.replace( /(?<=[0-9]*\.[0-9]{1})([0-9]*)/g,'')"
+          @input="analysis.value03 = analysis.value03.replace( /(?<=[0-9]*\.[0-9]{1})([0-9]*)/g,'').replace(/[^0-9\.]/g,'')"
         />
       </van-cell-group>
       <van-cell-group>
@@ -34,7 +34,7 @@
           label="血红蛋白 (Hb) [g/L]"
           placeholder="大于0的正整数"
           input-align="right"
-          @input="analysis.value04 = analysis.value04.replace(/[^0-9]/g, '')"
+          @input="analysis.value04 = analysis.value04.replace(/[^0-9]/g, '').replace(/[^0-9\.]/g,'')"
         />
       </van-cell-group>
       <van-cell-group>
@@ -43,7 +43,7 @@
           label="血小板计数 (PLT) [*10^9/L] "
           placeholder="大于0的整数"
           input-align="right"
-          @input="analysis.value05 = analysis.value05.replace(/[^0-9]/g, '')"
+          @input="analysis.value05 = analysis.value05.replace(/[^0-9]/g, '').replace(/[^0-9\.]/g,'')"
         />
       </van-cell-group>
       <van-cell-group>
@@ -52,7 +52,7 @@
           label="总胆红素 (TBIL) [umol/L]  "
           placeholder="实数，保留1位小数"
           input-align="right"
-          @input="analysis.value06 = analysis.value06.replace( /(?<=[0-9]*\.[0-9]{1})([0-9]*)/g,'')"
+          @input="analysis.value06 = analysis.value06.replace( /(?<=[0-9]*\.[0-9]{1})([0-9]*)/g,'').replace(/[^0-9\.]/g,'')"
         />
       </van-cell-group>
       <van-cell-group>
@@ -61,7 +61,7 @@
           label="白蛋白 (ALB) [g/L]  "
           placeholder="大于0的正整数"
           input-align="right"
-          @input="analysis.value07 = analysis.value07.replace(/[^0-9]/g, '')"
+          @input="analysis.value07 = analysis.value07.replace(/[^0-9]/g, '').replace(/^0$/g, '')"
         />
       </van-cell-group>
       <van-cell-group>
@@ -70,7 +70,7 @@
           label="空腹血糖 (FBG) [mmol/L]"
           placeholder="实数，保留1位小数"
           input-align="right"
-          @input="analysis.value08 = analysis.value08.replace( /(?<=[0-9]*\.[0-9]{1})([0-9]*)/g,'')"
+          @input="analysis.value08 = analysis.value08.replace( /(?<=[0-9]*\.[0-9]{1})([0-9]*)/g,'').replace(/[^0-9\.]/g,'')"
         />
       </van-cell-group>
       <van-cell-group>
@@ -79,7 +79,7 @@
           label="HbA1c [%]"
           placeholder="实数，保留1位小数"
           input-align="right"
-          @input="analysis.value09 = analysis.value09.replace( /(?<=[0-9]*\.[0-9]{1})([0-9]*)/g,'')"
+          @input="analysis.value09 = analysis.value09.replace( /(?<=[0-9]*\.[0-9]{1})([0-9]*)/g,'').replace(/[^0-9\.]/g,'')"
         />
       </van-cell-group>
       <van-cell-group>
@@ -88,7 +88,7 @@
           label="肌酐 (CRE) [umol/L] "
           placeholder="大于0的正整数"
           input-align="right"
-          @input="analysis.value10 = analysis.value10.replace(/[^0-9]/g, '')"
+          @input="analysis.value10 = analysis.value10.replace(/[^0-9]/g, '').replace(/[^0-9\.]/g,'')"
         />
       </van-cell-group>
       <van-cell-group>
@@ -97,7 +97,7 @@
           label="胆固醇 (CHOL) [mmol/L]  "
           placeholder="实数，保留2位小数"
           input-align="right"
-          @input="analysis.value11 = analysis.value11.replace( /(?<=[0-9]*\.[0-9]{2})([0-9]*)/g,'')"
+          @input="analysis.value11 = analysis.value11.replace( /(?<=[0-9]*\.[0-9]{2})([0-9]*)/g,'').replace(/[^0-9\.]/g,'')"
         />
       </van-cell-group>
       <van-cell-group>
@@ -106,7 +106,7 @@
           label="甘油三酯 (TG) [mmol/L] "
           placeholder="实数，保留2位小数"
           input-align="right"
-          @input="analysis.value12 = analysis.value12.replace( /(?<=[0-9]*\.[0-9]{2})([0-9]*)/g,'')"
+          @input="analysis.value12 = analysis.value12.replace( /(?<=[0-9]*\.[0-9]{2})([0-9]*)/g,'').replace(/[^0-9\.]/g,'')"
         />
       </van-cell-group>
       <van-cell-group>
@@ -115,7 +115,7 @@
           label="甲胎蛋白 (AFP) [ng/mL]  "
           placeholder="实数，保留2位小数"
           input-align="right"
-          @input="analysis.value13 = analysis.value13.replace( /(?<=[0-9]*\.[0-9]{2})([0-9]*)/g,'')"
+          @input="analysis.value13 = analysis.value13.replace( /(?<=[0-9]*\.[0-9]{2})([0-9]*)/g,'').replace(/[^0-9\.]/g,'')"
         />
       </van-cell-group>
       <van-cell-group>
@@ -124,7 +124,7 @@
           label="癌胚抗原 (CEA) [ng/mL] "
           placeholder="实数，保留2位小数"
           input-align="right"
-          @input="analysis.value14 = analysis.value14.replace( /(?<=[0-9]*\.[0-9]{2})([0-9]*)/g,'')"
+          @input="analysis.value14 = analysis.value14.replace( /(?<=[0-9]*\.[0-9]{2})([0-9]*)/g,'').replace(/[^0-9\.]/g,'')"
         />
       </van-cell-group>
       <van-cell-group>
@@ -133,7 +133,7 @@
           label="糖类抗原19-9(CA19-9) [U/mL]"
           placeholder="实数，保留2位小数"
           input-align="right"
-          @input="analysis.value15 = analysis.value15.replace( /(?<=[0-9]*\.[0-9]{2})([0-9]*)/g,'')"
+          @input="analysis.value15 = analysis.value15.replace( /(?<=[0-9]*\.[0-9]{2})([0-9]*)/g,'').replace(/[^0-9\.]/g,'')"
         />
       </van-cell-group>
       <van-cell-group>
@@ -142,7 +142,7 @@
           label="糖类抗原 125 (CA125) [U/mL] "
           placeholder="实数，保留2位小数"
           input-align="right"
-          @input="analysis.value16 = analysis.value16.replace( /(?<=[0-9]*\.[0-9]{2})([0-9]*)/g,'')"
+          @input="analysis.value16 = analysis.value16.replace( /(?<=[0-9]*\.[0-9]{2})([0-9]*)/g,'').replace(/[^0-9\.]/g,'')"
         />
       </van-cell-group>
       <van-cell-group>
@@ -151,7 +151,7 @@
           label="糖类抗原 7-24 (CA724) [U/mL]"
           placeholder="实数，保留2位小数"
           input-align="right"
-          @input="analysis.value17 = analysis.value17.replace( /(?<=[0-9]*\.[0-9]{2})([0-9]*)/g,'')"
+          @input="analysis.value17 = analysis.value17.replace( /(?<=[0-9]*\.[0-9]{2})([0-9]*)/g,'').replace(/[^0-9\.]/g,'')"
         />
       </van-cell-group>
       <van-cell-group>
@@ -160,7 +160,7 @@
           label="免疫球蛋白G4 (IgG4) [g/L] "
           placeholder="实数，保留3位小数"
           input-align="right"
-          @input="analysis.value18 = analysis.value18.replace( /(?<=[0-9]*\.[0-9]{3})([0-9]*)/g,'')"
+          @input="analysis.value18 = analysis.value18.replace( /(?<=[0-9]*\.[0-9]{3})([0-9]*)/g,'').replace(/[^0-9\.]/g,'')"
         />
       </van-cell-group>
     </div>

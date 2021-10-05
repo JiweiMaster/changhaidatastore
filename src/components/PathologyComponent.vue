@@ -182,7 +182,7 @@
           label="总淋巴结数(个)"
           placeholder="大于等于0的整数"
           input-align="right"
-          @input="value2 = value2.replace(/[^0-9]/g, '').replace('0', '')"
+          @input="value2 = value2.replace(/[^0-9]/g, '').replace(/^0$/g, '')"
         />
       </van-cell-group>
 
@@ -192,7 +192,7 @@
           label="阳性淋巴结数(个)"
           placeholder="大于等于0的整数"
           input-align="right"
-          @input="value3 = value3.replace(/[^0-9]/g, '').replace('0', '')"
+          @input="value3 = value3.replace(/[^0-9]/g, '').replace(/^0$/g, '')"
         />
       </van-cell-group>
 
@@ -222,7 +222,7 @@
           label="Ki-67(%)"
           placeholder="大于等于0的整数"
           input-align="right"
-          @input="value4 = value4.replace(/[^0-9]/g, '').replace('0', '')"
+          @input="value4 = value4.replace(/[^0-9]/g, '').replace(/^0$/g, '')"
         />
       </van-cell-group>
 

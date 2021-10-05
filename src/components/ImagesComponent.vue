@@ -17,7 +17,7 @@
           label="最大直径(cm) "
           placeholder="保留1位小数"
           input-align="right"
-          @input="zdzj = zdzj.replace( /(?<=[0-9]*\.[0-9]{1})([0-9]*)/g,'')"
+          @input="zdzj = zdzj.replace( /(?<=[0-9]*\.[0-9]{1})([0-9]*)/g,'').replace(/[^0-9\.]/g,'')"
         />
       </van-cell-group>
 
@@ -207,7 +207,7 @@
         (mm)"
           placeholder="保留1位小数"
           input-align="right"
-          @input="zygzj = zygzj.replace( /(?<=[0-9]*\.[0-9]{1})([0-9]*)/g,'')"
+          @input="zygzj = zygzj.replace( /(?<=[0-9]*\.[0-9]{1})([0-9]*)/g,'').replace(/[^0-9\.]/g,'')"
         />
       </van-cell-group>
 
