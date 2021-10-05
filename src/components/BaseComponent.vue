@@ -10,7 +10,9 @@
     <div style="margin-top: 15px">
       <div>住院号*:</div>
       <div>
-        <input class="input_div" v-model="hospitalNum" />
+        <input class="input_div" v-model="hospitalNum"
+               placeholder="大写字母/数字"
+               @input="hospitalNum = hospitalNum.replace(/[^A-Z\d]/g,'')"/>
       </div>
     </div>
     <!--     患者姓名     -->
@@ -24,7 +26,7 @@
     <div style="margin-top: 15px">
       <div>患者年龄*:</div>
       <div>
-        <input class="input_div" v-model="patientAge" />
+        <input class="input_div" v-model="patientAge" @input="patientAge = patientAge.replace(/[^\d]/g, '')"/>
       </div>
     </div>
     <!--          性别-->

@@ -16,6 +16,7 @@
             :options="options01"
             @close="show01 = false"
             @finish="onFinish01"
+            input-align="right"
           />
         </van-popup>
 
@@ -42,6 +43,7 @@
             :options="options02"
             @close="show02 = false"
             @finish="onFinish02"
+            input-align="right"
           />
         </van-popup>
       </van-cell-group>
@@ -61,6 +63,7 @@
             :options="options03"
             @close="show03 = false"
             @finish="onFinish03"
+            input-align="right"
           />
         </van-popup>
 
@@ -87,6 +90,7 @@
             :options="options04"
             @close="show04 = false"
             @finish="onFinish04"
+            input-align="right"
           />
         </van-popup>
       </van-cell-group>
@@ -97,6 +101,7 @@
           label="手术时间(min)"
           placeholder="大于0的正整数"
           input-align="right"
+          @input="value1 = value1.replace(/[^0-9]/g, '').replace('0', '')"
         />
       </van-cell-group>
 
@@ -106,6 +111,7 @@
           label="术中出血(ml)"
           placeholder="大于等于0的正整数"
           input-align="right"
+          @input="value2 = value2.replace(/[^0-9]/g, '').replace('0', '')"
         />
       </van-cell-group>
 
@@ -115,6 +121,7 @@
           label="输血量(ml)"
           placeholder="大于等于0的正整数"
           input-align="right"
+          @input="value3 = value3.replace(/[^0-9]/g, '').replace('0', '')"
         />
       </van-cell-group>
 
@@ -133,6 +140,7 @@
             :options="options05"
             @close="show05 = false"
             @finish="onFinish05"
+            input-align="right"
           />
         </van-popup>
       </van-cell-group>
@@ -152,6 +160,7 @@
             :options="options06"
             @close="show06 = false"
             @finish="onFinish06"
+            input-align="right"
           />
         </van-popup>
       </van-cell-group>
@@ -171,6 +180,7 @@
             :options="options07"
             @close="show07 = false"
             @finish="onFinish07"
+            input-align="right"
           />
         </van-popup>
       </van-cell-group>
@@ -190,6 +200,7 @@
             :options="options08"
             @close="show08 = false"
             @finish="onFinish08"
+            input-align="right"
           />
         </van-popup>
       </van-cell-group>
@@ -209,6 +220,7 @@
             :options="options09"
             @close="show09 = false"
             @finish="onFinish09"
+            input-align="right"
           />
         </van-popup>
       </van-cell-group>
@@ -220,6 +232,7 @@
           readonly
           label="乳糜漏"
           @click="show10 = true"
+          input-align="right"
         />
         <van-popup v-model="show10" position="bottom">
           <van-cascader
@@ -227,6 +240,7 @@
             :options="options10"
             @close="show10 = false"
             @finish="onFinish10"
+            input-align="right"
           />
         </van-popup>
       </van-cell-group>
@@ -238,6 +252,7 @@
           readonly
           label="腹腔感染"
           @click="show11 = true"
+          input-align="right"
         />
         <van-popup v-model="show11" position="bottom">
           <van-cascader
@@ -245,6 +260,7 @@
             :options="options11"
             @close="show11 = false"
             @finish="onFinish11"
+            input-align="right"
           />
         </van-popup>
       </van-cell-group>
@@ -256,6 +272,7 @@
           readonly
           label="VTE或PE"
           @click="show12 = true"
+          input-align="right"
         />
         <van-popup v-model="show12" position="bottom">
           <van-cascader
@@ -263,6 +280,7 @@
             :options="options12"
             @close="show12 = false"
             @finish="onFinish12"
+            input-align="right"
           />
         </van-popup>
       </van-cell-group>
@@ -282,6 +300,7 @@
             :options="options13"
             @close="show13 = false"
             @finish="onFinish13"
+            input-align="right"
           />
         </van-popup>
       </van-cell-group>
@@ -301,6 +320,7 @@
             :options="options14"
             @close="show14 = false"
             @finish="onFinish14"
+            input-align="right"
           />
         </van-popup>
       </van-cell-group>
@@ -320,6 +340,7 @@
             :options="options15"
             @close="show15 = false"
             @finish="onFinish15"
+            input-align="right"
           />
         </van-popup>
       </van-cell-group>
@@ -330,6 +351,7 @@
           label="术后住院天数(天)"
           placeholder="大于等于0的正整数"
           input-align="right"
+          @input="value4 = value4.replace(/[^0-9]/g, '').replace('0', '')"
         />
       </van-cell-group>
 

@@ -17,6 +17,7 @@
             :options="options"
             @close="show = false"
             @finish="onFinish"
+            input-align="right"
           />
         </van-popup>
 
@@ -35,6 +36,7 @@
             :options="options_IPMN_1"
             @close="show_IPMN_1_cascader = false"
             @finish="onFinish_IPMN_1"
+            input-align="right"
           />
         </van-popup>
         <van-field
@@ -52,6 +54,7 @@
             :options="options_IPMN_2"
             @close="show_IPMN_2_cascader = false"
             @finish="onFinish_IPMN_2"
+            input-align="right"
           />
         </van-popup>
 
@@ -69,6 +72,7 @@
           label="最大直径(cm)"
           placeholder="限数字，可带小数点"
           input-align="right"
+          @input="value1 = value1.replace(/[^.\d]/g, '')"
         />
       </van-cell-group>
 
@@ -87,6 +91,7 @@
             :options="options1"
             @close="show1 = false"
             @finish="onFinish1"
+            input-align="right"
           />
         </van-popup>
       </van-cell-group>
@@ -106,6 +111,7 @@
             :options="options2"
             @close="show2 = false"
             @finish="onFinish2"
+            input-align="right"
           />
         </van-popup>
       </van-cell-group>
@@ -125,6 +131,7 @@
             :options="options3"
             @close="show3 = false"
             @finish="onFinish3"
+            input-align="right"
           />
         </van-popup>
       </van-cell-group>
@@ -144,6 +151,7 @@
             :options="options4"
             @close="show4 = false"
             @finish="onFinish4"
+            input-align="right"
           />
         </van-popup>
       </van-cell-group>
@@ -163,6 +171,7 @@
             :options="options5"
             @close="show5 = false"
             @finish="onFinish5"
+            input-align="right"
           />
         </van-popup>
       </van-cell-group>
@@ -173,6 +182,7 @@
           label="总淋巴结数(个)"
           placeholder="大于等于0的整数"
           input-align="right"
+          @input="value2 = value2.replace(/[^0-9]/g, '').replace('0', '')"
         />
       </van-cell-group>
 
@@ -182,6 +192,7 @@
           label="阳性淋巴结数(个)"
           placeholder="大于等于0的整数"
           input-align="right"
+          @input="value3 = value3.replace(/[^0-9]/g, '').replace('0', '')"
         />
       </van-cell-group>
 
@@ -200,6 +211,7 @@
             :options="options6"
             @close="show6 = false"
             @finish="onFinish6"
+            input-align="right"
           />
         </van-popup>
       </van-cell-group>
@@ -210,11 +222,14 @@
           label="Ki-67(%)"
           placeholder="大于等于0的整数"
           input-align="right"
+          @input="value4 = value4.replace(/[^0-9]/g, '').replace('0', '')"
         />
       </van-cell-group>
 
       <van-cell-group>
-        <van-field v-model="value5" label="其他备注" input-align="right" />
+        <van-field v-model="value5"
+                   label="其他备注"
+                   input-align="right" />
       </van-cell-group>
     </div>
     <!--          提交的按钮-->
