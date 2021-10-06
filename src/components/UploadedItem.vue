@@ -46,6 +46,8 @@
     },
     methods: {
       displayAllData(id) {
+        if (this.isShowLoading === true) return
+        this.isShowLoading = true
         let formData = new FormData()
         formData.append('baseHospitalNum', id)
         axios.post(queryDataUrl, formData).then(
@@ -53,6 +55,7 @@
             console.log('获取结果', response.data)
             let data = JSON.stringify(response.data.data)
             localStorage.setItem(id, data)
+            this.isShowLoading = false
             this.$router.push({
               path: '/BaseInfo',
               query: { id: id, readOnly: true }
@@ -60,6 +63,7 @@
           },
           (error) => {
             console.log('获取失败', error.message)
+            this.isShowLoading = false
           }
         )
       }
