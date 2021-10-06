@@ -1,39 +1,42 @@
 <template>
-  <div
-    style="
-      margin-left: 10px;
-      margin-right: 10px;
-      margin-top: 30px;
-    "
-  >
+  <div style="margin-left: 10px; margin-right: 10px; margin-top: 30px">
     <!--     住院号     -->
     <div style="margin-top: 15px">
       <div>住院号*:</div>
       <div>
-        <input class="input_div" v-model="hospitalNum"
-               placeholder="大写字母/数字"
-               @input="hospitalNum = hospitalNum.replace(/[^A-Z\d]/g,'')"/>
+        <input
+          :disabled="disable"
+          class="input_div"
+          v-model="hospitalNum"
+          placeholder="大写字母/数字"
+          @input="hospitalNum = hospitalNum.replace(/[^A-Z\d]/g, '')"
+        />
       </div>
     </div>
     <!--     患者姓名     -->
     <div style="margin-top: 15px">
       <div>患者姓名*:</div>
       <div>
-        <input class="input_div" v-model="patientName" />
+        <input :disabled="disable" class="input_div" v-model="patientName" />
       </div>
     </div>
     <!--     患者年龄     -->
     <div style="margin-top: 15px">
       <div>患者年龄*:</div>
       <div>
-        <input class="input_div" v-model="patientAge" @input="patientAge = patientAge.replace(/[^\d]/g, '')"/>
+        <input
+          :disabled="disable"
+          class="input_div"
+          v-model="patientAge"
+          @input="patientAge = patientAge.replace(/[^\d]/g, '')"
+        />
       </div>
     </div>
     <!--          性别-->
     <div style="margin-top: 15px">
       <div>患者性别*:</div>
       <div style="margin-top: 10px">
-        <van-radio-group v-model="patientGender">
+        <van-radio-group v-model="patientGender" :disabled="disable">
           <van-radio
             name="1"
             shape="square"
@@ -56,9 +59,15 @@
         type="info"
         style="margin: auto 20px; width: 80px"
         v-on:click="saveBtn"
+        :disabled="disable"
         >保存</van-button
       >
-      <van-button round type="info" style="width: 80px" v-on:click="uploadBtn"
+      <van-button
+        round
+        type="info"
+        style="width: 80px"
+        v-on:click="uploadBtn"
+        :disabled="disable"
         >上传</van-button
       >
       <div></div>
@@ -78,7 +87,14 @@
         patientGender: ''
       }
     },
-    props: { id: String, base: Object },
+    props: {
+      id: String,
+      base: Object,
+      disable: {
+        type: Boolean,
+        default: false
+      }
+    },
     methods: {
       cancelBtn() {
         this.$router.back()
@@ -130,7 +146,7 @@
   .van-button {
     height: 44px !important;
   }
-  .span{
+  .span {
     font-size: 10px !important;
   }
 </style>

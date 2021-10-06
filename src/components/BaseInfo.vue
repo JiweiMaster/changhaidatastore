@@ -8,6 +8,7 @@
           @uploadItem="handleUpload"
           :id="this.base.baseHospitalNum"
           :base="this.base"
+          :disable="this.disable"
       /></van-tab>
       <van-tab title="化验"
         ><AnalysisComponent
@@ -16,6 +17,7 @@
           @uploadItem="handleUpload"
           :id="this.base.baseHospitalNum"
           :analysis_prop="this.analysis"
+          :disable="this.disable"
       /></van-tab>
       <van-tab title="影像"
         ><ImagesComponent
@@ -24,6 +26,7 @@
           @uploadItem="handleUpload"
           :id="this.base.baseHospitalNum"
           :images="this.images"
+          :disable="this.disable"
       /></van-tab>
       <van-tab title="手术"
         ><SurgeryComponent
@@ -32,6 +35,7 @@
           @uploadItem="handleUpload"
           :id="this.base.baseHospitalNum"
           :surgery="this.surgery"
+          :disable="this.disable"
       /></van-tab>
       <van-tab title="病理"
         ><PathologyComponent
@@ -40,6 +44,7 @@
           @uploadItem="handleUpload"
           :id="this.base.baseHospitalNum"
           :pathology="this.pathology"
+          :disable="this.disable"
       /></van-tab>
     </van-tabs>
   </div>
@@ -70,6 +75,7 @@
     data() {
       return {
         active: 0,
+        disable: false, //决定子组件是否禁止编辑
 
         base: {
           baseHospitalNum: '',
@@ -399,6 +405,10 @@
           this.pathology.pathology_qtzqzy = temp.pathology_qtzqzy
           this.pathology.pathology_Ki67 = temp.pathology_Ki67
           this.pathology.pathology_qtbz = temp.pathology_qtbz
+          if (this.$route.query.readOnly == 'true') {
+            this.disable = true
+            localStorage.removeItem(temp.baseHospitalNum)
+          }
         }
       }
     },
@@ -411,22 +421,22 @@
 
 <style>
   .input_div {
-    margin-top: 5px ;
-    width: 90vw ;
-    height: 30px ;
-    border-radius: 4px ;
-    border: solid 1px lightgray ;
-    padding-left: 10px ;
+    margin-top: 5px;
+    width: 90vw;
+    height: 30px;
+    border-radius: 4px;
+    border: solid 1px lightgray;
+    padding-left: 10px;
   }
   .van-radio__icon--checked .van-icon {
-    background-color: #913935 ;
-    border-color: #913935 ;
+    background-color: #913935;
+    border-color: #913935;
   }
   .van-tabs__line {
-    background-color: #fff ;
+    background-color: #fff;
   }
   .van-tabs__nav {
-    background-color: #913935 ;
+    background-color: #913935;
   }
   .van-tab {
     color: #fff !important;

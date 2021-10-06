@@ -8,7 +8,8 @@
         (个)"
           placeholder="正整数"
           input-align="right"
-          @input="zlsm = zlsm.replace(/[^0-9]/g,'')"
+          @input="zlsm = zlsm.replace(/[^0-9]/g, '')"
+          :readonly="disable"
         />
       </van-cell-group>
       <van-cell-group>
@@ -17,7 +18,12 @@
           label="最大直径(cm) "
           placeholder="保留1位小数"
           input-align="right"
-          @input="zdzj = zdzj.replace( /(?<=[0-9]*\.[0-9]{1})([0-9]*)/g,'').replace(/[^0-9\.]/g,'')"
+          @input="
+            zdzj = zdzj
+              .replace(/(?<=[0-9]*\.[0-9]{1})([0-9]*)/g, '')
+              .replace(/[^0-9\.]/g, '')
+          "
+          :readonly="disable"
         />
       </van-cell-group>
 
@@ -28,6 +34,7 @@
           readonly
           label="囊壁结节"
           @click="show01 = true"
+          input-align="right"
         />
         <van-popup v-model="show01" position="bottom">
           <van-cascader
@@ -207,7 +214,12 @@
         (mm)"
           placeholder="保留1位小数"
           input-align="right"
-          @input="zygzj = zygzj.replace( /(?<=[0-9]*\.[0-9]{1})([0-9]*)/g,'').replace(/[^0-9\.]/g,'')"
+          @input="
+            zygzj = zygzj
+              .replace(/(?<=[0-9]*\.[0-9]{1})([0-9]*)/g, '')
+              .replace(/[^0-9\.]/g, '')
+          "
+          :readonly="disable"
         />
       </van-cell-group>
 
@@ -244,6 +256,7 @@
           :before-read="asyncBeforeRead"
           :after-read="afterRead"
           :before-delete="beforeDelete"
+          :disabled="disable"
         >
           <template #preview-cover="{ file }">
             <div class="preview-cover van-ellipsis">
@@ -265,6 +278,7 @@
           maxlength="200"
           show-word-limit
           input-align="right"
+          :readonly="disable"
         />
       </van-cell-group>
 
@@ -278,6 +292,7 @@
           maxlength="200"
           show-word-limit
           input-align="right"
+          :readonly="disable"
         />
       </van-cell-group>
     </div>
@@ -298,9 +313,15 @@
         type="info"
         style="margin: auto 20px; width: 80px"
         v-on:click="saveBtn"
+        :disabled="disable"
         >保存</van-button
       >
-      <van-button round type="info" style="width: 80px" v-on:click="uploadBtn"
+      <van-button
+        round
+        type="info"
+        style="width: 80px"
+        v-on:click="uploadBtn"
+        :disabled="disable"
         >上传</van-button
       >
       <div></div>
@@ -439,7 +460,14 @@
         qx_image_num: { 平扫相: 0, 动脉相: 0, 门静脉相: 0, 延迟相: 0 } //记录当前期相图像上传了几个
       }
     },
-    props: { id: String, images: Object },
+    props: {
+      id: String,
+      images: Object,
+      disable: {
+        type: Boolean,
+        default: false
+      }
+    },
     methods: {
       onFinish01({ selectedOptions }) {
         this.show01 = false
@@ -647,5 +675,4 @@
   .van-button {
     height: 44px !important;
   }
-
 </style>

@@ -102,6 +102,7 @@
           placeholder="大于0的正整数"
           input-align="right"
           @input="value1 = value1.replace(/[^0-9]/g, '').replace(/^0$/g, '')"
+          :readonly="disable"
         />
       </van-cell-group>
 
@@ -112,6 +113,7 @@
           placeholder="大于等于0的正整数"
           input-align="right"
           @input="value2 = value2.replace(/[^0-9]/g, '').replace(/^0$/g, '')"
+          :readonly="disable"
         />
       </van-cell-group>
 
@@ -122,6 +124,7 @@
           placeholder="大于等于0的正整数"
           input-align="right"
           @input="value3 = value3.replace(/[^0-9]/g, '').replace(/^0$/g, '')"
+          :readonly="disable"
         />
       </van-cell-group>
 
@@ -352,6 +355,7 @@
           placeholder="大于等于0的正整数"
           input-align="right"
           @input="value4 = value4.replace(/[^0-9]/g, '').replace(/^0$/g, '')"
+          :readonly="disable"
         />
       </van-cell-group>
 
@@ -362,6 +366,7 @@
           placeholder="选择每日中最高的引流液淀粉酶填写"
           center
           input-align="right"
+          :readonly="disable"
         >
           <template v-slot:button>
             <van-button
@@ -370,6 +375,7 @@
               class="submit_btn"
               type="danger"
               round
+              :disabled="disable"
             ></van-button>
           </template>
         </van-field>
@@ -380,6 +386,7 @@
           :label="item"
           v-model="value5[index + 1]"
           input-align="right"
+          :readonly="disable"
         ></van-field>
       </van-cell-group>
     </div>
@@ -390,7 +397,8 @@
         justify-content: center;
         margin-top: 50px;
         margin-bottom: 5vh;
-      ">
+      "
+    >
       <van-button round type="info" style="width: 80px" v-on:click="cancelBtn"
         >取消</van-button
       >
@@ -399,9 +407,15 @@
         type="info"
         style="margin: auto 20px; width: 80px"
         v-on:click="saveBtn"
+        :disabled="disable"
         >保存</van-button
       >
-      <van-button round type="info" style="width: 80px" v-on:click="uploadBtn"
+      <van-button
+        round
+        type="info"
+        style="width: 80px"
+        v-on:click="uploadBtn"
+        :disabled="disable"
         >上传</van-button
       >
       <div></div>
@@ -639,7 +653,14 @@
         day: 1 //供for使用
       }
     },
-    props: { id: String, surgery: Object },
+    props: {
+      id: String,
+      surgery: Object,
+      disable: {
+        type: Boolean,
+        default: false
+      }
+    },
     methods: {
       onFinish01({ selectedOptions }) {
         this.show01 = false
@@ -800,7 +821,7 @@
 </script>
 
 <style scoped>
-  .submit_btn{
+  .submit_btn {
     border: none;
     border-radius: 30px !important;
     background-color: white;

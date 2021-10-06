@@ -43,8 +43,8 @@
   import { Dialog } from 'vant'
   import axios from 'axios'
 
-  const uploadDataUrl = 'http://localhost:8080/upload_all_data/'
-  // const uploadDataUrl = 'http://duolingo.cmitnb.top:8003/upload_all_data/'
+  // const uploadDataUrl = 'http://localhost:8080/upload_all_data/'
+  const uploadDataUrl = 'http://duolingo.cmitnb.top:8003/upload_all_data/'
 
   export default {
     name: 'EditingItem',
