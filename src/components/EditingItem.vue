@@ -8,7 +8,8 @@
         border-bottom: 1px solid rgba(0, 0, 0, 0.1);
       "
       v-for="(item, index) in patientInfo"
-      :key="index">
+      :key="index"
+    >
       <div style="float: left; width: 60vw">
         <p class="id">住院号：{{ item.baseHospitalNum }}</p>
         <p>
@@ -42,8 +43,8 @@
   import { Dialog } from 'vant'
   import axios from 'axios'
 
-  const uploadDataUrl = 'http://localhost:8080/upload_all_data/'
-  // const uploadDataUrl = 'http://duolingo.cmitnb.top:8003/upload_all_data/'
+  // const uploadDataUrl = 'http://localhost:8080/upload_all_data/'
+  const uploadDataUrl = 'http://duolingo.cmitnb.top:8003/upload_all_data/'
 
   export default {
     name: 'EditingItem',
@@ -79,7 +80,8 @@
           })
             .then(() => {
               console.log('上传' + item)
-              let all_data = JSON.stringify(item)
+              // let all_data = JSON.stringify(item)
+              let all_data = localStorage.getItem(item.baseHospitalNum)
               let form_data = new FormData()
               form_data.append('all_data', all_data)
               axios
@@ -143,7 +145,7 @@
   .btn {
     margin: 2vw;
   }
-  .van-button--info{
+  .van-button--info {
     padding: 5px;
     background-color: #913935;
     border: #913935;

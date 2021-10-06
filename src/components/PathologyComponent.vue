@@ -73,6 +73,7 @@
           placeholder="限数字，可带小数点"
           input-align="right"
           @input="value1 = value1.replace(/[^.\d]/g, '')"
+          :readonly="disable"
         />
       </van-cell-group>
 
@@ -183,6 +184,7 @@
           placeholder="大于等于0的整数"
           input-align="right"
           @input="value2 = value2.replace(/[^0-9]/g, '').replace(/^0$/g, '')"
+          :readonly="disable"
         />
       </van-cell-group>
 
@@ -193,6 +195,7 @@
           placeholder="大于等于0的整数"
           input-align="right"
           @input="value3 = value3.replace(/[^0-9]/g, '').replace(/^0$/g, '')"
+          :readonly="disable"
         />
       </van-cell-group>
 
@@ -223,13 +226,17 @@
           placeholder="大于等于0的整数"
           input-align="right"
           @input="value4 = value4.replace(/[^0-9]/g, '').replace(/^0$/g, '')"
+          :readonly="disable"
         />
       </van-cell-group>
 
       <van-cell-group>
-        <van-field v-model="value5"
-                   label="其他备注"
-                   input-align="right" />
+        <van-field
+          v-model="value5"
+          label="其他备注"
+          input-align="right"
+          :readonly="disable"
+        />
       </van-cell-group>
     </div>
     <!--          提交的按钮-->
@@ -249,9 +256,15 @@
         type="info"
         style="margin: auto 20px; width: 80px"
         v-on:click="saveBtn"
+        :disabled="disable"
         >保存</van-button
       >
-      <van-button round type="info" style="width: 80px" v-on:click="uploadBtn"
+      <van-button
+        round
+        type="info"
+        style="width: 80px"
+        v-on:click="uploadBtn"
+        :disabled="disable"
         >上传</van-button
       >
     </div>
@@ -447,7 +460,14 @@
         ]
       }
     },
-    props: { id: String, pathology: Object },
+    props: {
+      id: String,
+      pathology: Object,
+      disable: {
+        type: Boolean,
+        default: false
+      }
+    },
     methods: {
       onFinish({ selectedOptions }) {
         this.show = false

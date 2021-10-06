@@ -9,6 +9,7 @@
       "
       v-for="(item, index) in briefPatientInfo"
       :key="index"
+      @click="displayAllData(item[0])"
     >
       <div style="float: left">
         <p class="id">住院号：{{ item[0] }}</p>
@@ -21,7 +22,9 @@
       </div>
     </div>
     <div style="margin-top: 100px">
-      <van-loading size="24px" vertical v-if="isShowLoading">加载中...</van-loading>
+      <van-loading size="24px" vertical v-if="isShowLoading"
+        >加载中...</van-loading
+      >
     </div>
   </div>
 </template>
@@ -31,14 +34,34 @@
 
   // const getDataUrl = 'http://localhost:8080/query_patient_info/'
   const getDataUrl = 'http://duolingo.cmitnb.top:8003/query_patient_info/'
-
+  const queryDataUrl = 'http://duolingo.cmitnb.top:8003/query_info_by_patientid/'
 
   export default {
     name: 'UploadedItem',
     data() {
       return {
         briefPatientInfo: [],
-        isShowLoading:true
+        isShowLoading: true
+      }
+    },
+    methods: {
+      displayAllData(id) {
+        let formData = new FormData()
+        formData.append('baseHospitalNum', id)
+        axios.post(queryDataUrl, formData).then(
+          (response) => {
+            console.log('获取结果', response.data)
+            let data = JSON.stringify(response.data.data)
+            localStorage.setItem(id, data)
+            this.$router.push({
+              path: '/BaseInfo',
+              query: { id: id, readOnly: true }
+            })
+          },
+          (error) => {
+            console.log('获取失败', error.message)
+          }
+        )
       }
     },
     created() {
