@@ -53,9 +53,9 @@
         axios.post(queryDataUrl, formData).then(
           (response) => {
             console.log('获取结果', response.data)
-            this.isShowLoading = false
             let data = JSON.stringify(response.data.data)
             localStorage.setItem(id, data)
+            this.isShowLoading = false
             this.$router.push({
               path: '/BaseInfo',
               query: { id: id, readOnly: true }
